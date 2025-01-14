@@ -1,5 +1,16 @@
 # Penetration Testing Process
-
+## Summary
+- [Penetration Testing Process](#penetration-testing-process)
+  - [Summary](#summary)
+  - [**Penetration Testing Stages**](#penetration-testing-stages)
+    - [**Pre-Engagement**](#pre-engagement)
+    - [**Information Gathering**](#information-gathering)
+    - [**Vulnerability Assessment**](#vulnerability-assessment)
+    - [**Exploitation**](#exploitation)
+    - [**Post-Exploitation**](#post-exploitation)
+    - [**Lateral Movement**](#lateral-movement)
+    - [**Proof-of-Concept**](#proof-of-concept)
+    - [**Post-Engagement**](#post-engagement)
 ## **Penetration Testing Stages**
 
 The most effective way to represent and define these is through interdependent `stages`. We often find in our research that these processes are presented in the form of a circular process. If we look at this more closely and imagine that even a single component of the circular process does not apply, the entire process is disrupted. Strictly defined, the whole process fails. If we assume that we start this process from the beginning, but already with the newly acquired information, it is already a new process approach that does not undo the previous one.
@@ -49,18 +60,3 @@ In this stage, we document, step-by-step, the steps we took to achieve network c
 ### **Post-Engagement**
 
 During post-engagement, detailed documentation is prepared for both administrators and client company management to understand the severity of the vulnerabilities found. At this stage, we also clean up all traces of our actions on all hosts and servers. During this stage, we create the deliverables for our client, hold a report walkthrough meeting, and sometimes deliver an executive presentation to target company executives or their board of directors. Lastly, we will archive our testing data per our contractual obligations and company policy. We will typically retain this data for a set period or until we perform a post-remediation assessment (retest) to test the client's fixes.
-
-## **Importance**
-
-We must internalize this procedure and use it as a basis for all our technical engagements. Each stage's components allow us to precisely understand which areas we need to improve upon and where most of our difficulties and gaps in knowledge are. For example, we can think of a website as a target we need to study.
-
-| **Stage** | **Description** |
-| --- | --- |
-| **`1. Pre-Engagement`** | The first step is to create all the necessary documents in the pre-engagement phase, discuss the assessment objectives, and clarify any questions. |
-| **`2. Information Gathering`** | Once the pre-engagement activities are complete, we investigate the company's existing website we have been assigned to assess. We identify the technologies in use and learn how the web application functions. |
-| **`3. Vulnerability Assessment`** | With this information, we can look for known vulnerabilities and investigate questionable features that may allow for unintended actions. |
-| **`4. Exploitation`** | Once we have found potential vulnerabilities, we prepare our exploit code, tools, and environment and test the webserver for these potential vulnerabilities. |
-| **`5. Post-Exploitation`** | Once we have successfully exploited the target, we jump into information gathering and examine the webserver from the inside. If we find sensitive information during this stage, we try to escalate our privileges (depending on the system and configurations). |
-| **`6. Lateral Movement`** | If other servers and hosts in the internal network are in scope, we then try to move through the network and access other hosts and servers using the information we have gathered. |
-| **`7. Proof-of-Concept`** | We create a proof-of-concept that proves that these vulnerabilities exist and potentially even automate the individual steps that trigger these vulnerabilities. |
-| **`8. Post-Engagement`** | Finally, the documentation is completed and presented to our client as a formal report deliverable. Afterward, we may hold a report walkthrough meeting to clarify anything about our testing or results and provide any needed support to personnel tasked with remediating our findings. |
