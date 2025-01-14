@@ -1,7 +1,5 @@
 # Penetration Testing Process
-## Summary
 - [Penetration Testing Process](#penetration-testing-process)
-  - [Summary](#summary)
   - [**Penetration Testing Stages**](#penetration-testing-stages)
     - [**Pre-Engagement**](#pre-engagement)
     - [**Information Gathering**](#information-gathering)
