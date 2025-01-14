@@ -1,7 +1,7 @@
 # CPTS Study Reference  
 
 ![HackTheBox Academy CPTS Study Path](/images/logo/cpts-logo.webp)  
-
+## HackTheBox Certified Penetration Tester Modules
 ## HackTheBox Certified Penetration Tester CheatSheet 
 * [Getting Started](/cheatsheet/Getting%20Started.md)  
 * [Network Enumeration NMAP](/cheatsheet/Network%20Enumeration%20NMAP.md)  
