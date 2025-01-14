@@ -5,7 +5,7 @@
 ## HackTheBox Certified Penetration Tester CheatSheet 
 
 * [Getting Started](/module/Getting%20Started.md)  
-* [Network Enumeration NMAP]("/module/Network%20Enumeration%20NMAP.md")  
+* [Network Enumeration NMAP](/module/Network%20Enumeration%20NMAP.md)  
 * [Foot-printing](/module/Footprinting.md)  
 * [Information Gathering](/module/Information%20Gathering.md)  
 * [File Transfers](/module/File%20Transfers.md)  
@@ -27,7 +27,7 @@
 * [Command Injections](/module/command%20injection.md)
 * [Web Attacks](/module/Web-Attacks.md)
 * [Attacking Common Applications](/module)
-* [Linux Privilege Escalation](/module)
+* [Linux Privilege Escalation](/module) 
 * [Windows Privilege Escalation](/module)
 * [Documentation & Reporting](/module)
 * [Attacking Enterprise Networks](/module)
