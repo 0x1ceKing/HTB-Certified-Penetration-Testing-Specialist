@@ -1,11 +1,9 @@
 # CPTS Study Reference  
 
 ![HackTheBox Academy CPTS Study Path](/images/logo/cpts-logo.webp)  
-# HackTheBox Certified Penetration Tester Modules
-## Penetration Testing Process
-* [Penetration Testing Stages](/modules/Penetration%20Testing%20Process/Penetration%20Testing%20Stages.md)
-* [Importance](/modules/Penetration%20Testing%20Process/Importance.md)
-# HackTheBox Certified Penetration Tester CheatSheet 
+## HackTheBox Certified Penetration Tester Modules
+### [Penetration Testing Process](/modules/Penetration%20Testing%20Process/README.md)
+## HackTheBox Certified Penetration Tester CheatSheet 
 * [Getting Started](/cheatsheet/Getting%20Started.md)  
 * [Network Enumeration NMAP](/cheatsheet/Network%20Enumeration%20NMAP.md)  
 * [Foot-printing](/cheatsheet/Footprinting.md)  
