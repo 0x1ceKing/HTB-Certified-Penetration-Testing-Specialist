@@ -1,4 +1,15 @@
 # Penetration Testing Process
+- [Penetration Testing Process](#penetration-testing-process)
+  - [**Penetration Testing Stages**](#penetration-testing-stages)
+    - [**Pre-Engagement**](#pre-engagement)
+    - [**Information Gathering**](#information-gathering)
+    - [**Vulnerability Assessment**](#vulnerability-assessment)
+    - [**Exploitation**](#exploitation)
+    - [**Post-Exploitation**](#post-exploitation)
+    - [**Lateral Movement**](#lateral-movement)
+    - [**Proof-of-Concept**](#proof-of-concept)
+    - [**Post-Engagement**](#post-engagement)
+  - [**Importance**](#importance)
 
 ## **Penetration Testing Stages**
 
