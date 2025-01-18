@@ -1,4 +1,15 @@
 # SMTP
+- [SMTP](#smtp)
+  - [**Default Configuration**](#default-configuration)
+    - [**Default Configuration**](#default-configuration-1)
+    - [**Telnet - HELO/EHLO**](#telnet---heloehlo)
+    - [**Telnet - VRFY**](#telnet---vrfy)
+    - [**Send an Email**](#send-an-email)
+  - [**Dangerous Settings**](#dangerous-settings)
+    - [**Open Relay Configuration**](#open-relay-configuration)
+  - [**Footprinting the Service**](#footprinting-the-service)
+    - [**Nmap**](#nmap)
+    - [**Nmap - Open Relay**](#nmap---open-relay)
 
 The `Simple Mail Transfer Protocol` (`SMTP`) is a protocol for sending emails in an IP network. It can be used between an email client and an outgoing mail server or between two SMTP servers. SMTP is often combined with the IMAP or POP3 protocols, which can fetch emails and send emails. In principle, it is a client-server-based protocol, although SMTP can be used between a client and a server and between two SMTP servers. In this case, a server effectively acts as a client.
 

@@ -1,4 +1,14 @@
 # IMAP / POP3
+- [IMAP / POP3](#imap--pop3)
+  - [**Default Configuration**](#default-configuration)
+    - [**IMAP Commands**](#imap-commands)
+    - [**POP3 Commands**](#pop3-commands)
+  - [**Dangerous Settings**](#dangerous-settings)
+  - [**Footprinting the Service**](#footprinting-the-service)
+    - [**Nmap**](#nmap)
+    - [**cURL**](#curl)
+    - [**OpenSSL - TLS Encrypted Interaction POP3**](#openssl---tls-encrypted-interaction-pop3)
+    - [**OpenSSL - TLS Encrypted Interaction IMAP**](#openssl---tls-encrypted-interaction-imap)
 
 With the help of the `Internet Message Access Protocol` (`IMAP`), access to emails from a mail server is possible. Unlike the `Post Office Protocol` (`POP3`), IMAP allows online management of emails directly on the server and supports folder structures. Thus, it is a network protocol for the online management of emails on a remote server. The protocol is client-server-based and allows synchronization of a local email client with the mailbox on the server, providing a kind of network file system for emails, allowing problem-free synchronization across several independent clients. POP3, on the other hand, does not have the same functionality as IMAP, and it only provides listing, retrieving, and deleting emails as functions at the email server. Therefore, protocols such as IMAP must be used for additional functionalities such as hierarchical mailboxes directly at the mail server, access to multiple mailboxes during a session, and preselection of emails.
 

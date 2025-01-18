@@ -1,4 +1,10 @@
 # Domain Information
+- [Domain Information](#domain-information)
+  - [**Online Presence**](#online-presence)
+    - [**Certificate Transparency**](#certificate-transparency)
+    - [**Company Hosted Servers**](#company-hosted-servers)
+    - [**Shodan - IP List**](#shodan---ip-list)
+    - [**DNS Records**](#dns-records)
 
 ## **Online Presence**
 

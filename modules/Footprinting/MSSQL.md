@@ -1,4 +1,13 @@
 # MSSQL
+- [MSSQL](#mssql)
+    - [**MSSQL Clients**](#mssql-clients)
+    - [**MSSQL Databases**](#mssql-databases)
+  - [**Default Configuration**](#default-configuration)
+  - [**Dangerous Settings**](#dangerous-settings)
+  - [**Footprinting the Service**](#footprinting-the-service)
+    - [**NMAP MSSQL Script Scan**](#nmap-mssql-script-scan)
+    - [**MSSQL Ping in Metasploit**](#mssql-ping-in-metasploit)
+    - [**Connecting with Mssqlclient.py**](#connecting-with-mssqlclientpy)
 
 [Microsoft SQL](https://www.microsoft.com/en-us/sql-server/sql-server-2019) (`MSSQL`) is Microsoft's SQL-based relational database management system. Unlike MySQL, which we discussed in the last section, MSSQL is closed source and was initially written to run on Windows operating systems. It is popular among database administrators and developers when building applications that run on Microsoft's .NET framework due to its strong native support for .NET. There are versions of MSSQL that will run on Linux and MacOS, but we will more likely come across MSSQL instances on targets running Windows.
 

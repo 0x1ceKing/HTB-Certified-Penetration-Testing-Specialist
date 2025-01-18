@@ -1,4 +1,18 @@
 # SNMP
+- [SNMP](#snmp)
+    - [**MIB**](#mib)
+    - [**OID**](#oid)
+    - [**SNMPv1**](#snmpv1)
+    - [**SNMPv2**](#snmpv2)
+    - [**SNMPv3**](#snmpv3)
+    - [**Community Strings**](#community-strings)
+  - [**Default Configuration**](#default-configuration)
+    - [**SNMP Daemon Config**](#snmp-daemon-config)
+  - [**Dangerous Settings**](#dangerous-settings)
+  - [**Footprinting the Service**](#footprinting-the-service)
+    - [**SNMPwalk**](#snmpwalk)
+    - [**OneSixtyOne**](#onesixtyone)
+    - [**Braa**](#braa)
 
 `Simple Network Management Protocol` ([SNMP](https://datatracker.ietf.org/doc/html/rfc1157)) was created to monitor network devices. In addition, this protocol can also be used to handle configuration tasks and change settings remotely. SNMP-enabled hardware includes routers, switches, servers, IoT devices, and many other devices that can also be queried and controlled using this standard protocol. Thus, it is a protocol for monitoring and managing network devices. In addition, configuration tasks can be handled, and settings can be made remotely using this standard. The current version is `SNMPv3`, which increases the security of SNMP in particular, but also the complexity of using this protocol.
 

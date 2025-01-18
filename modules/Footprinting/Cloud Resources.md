@@ -1,4 +1,13 @@
 # Cloud Resources
+- [Cloud Resources](#cloud-resources)
+    - [**Company Hosted Servers**](#company-hosted-servers)
+    - [**Google Search for AWS**](#google-search-for-aws)
+    - [**Google Search for Azure**](#google-search-for-azure)
+    - [**Target Website - Source Code**](#target-website---source-code)
+    - [**Domain.Glass Results**](#domainglass-results)
+    - [**GrayHatWarfare Results**](#grayhatwarfare-results)
+    - [**Private and Public SSH Keys Leaked**](#private-and-public-ssh-keys-leaked)
+    - [**SSH Private Key**](#ssh-private-key)
 
 The use of cloud, such as [AWS](https://aws.amazon.com/), [GCP](https://cloud.google.com/), [Azure](https://azure.microsoft.com/en-us/), and others, is now one of the essential components for many companies nowadays. After all, all companies want to be able to do their work from anywhere, so they need a central point for all management. This is why services from `Amazon` (`AWS`), `Google` (`GCP`), and `Microsoft` (`Azure`) are ideal for this purpose.
 

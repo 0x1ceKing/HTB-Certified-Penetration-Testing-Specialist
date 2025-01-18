@@ -1,4 +1,10 @@
 # IPMI
+- [IPMI](#ipmi)
+  - [**Footprinting the Service**](#footprinting-the-service)
+    - [**Nmap**](#nmap)
+    - [**Metasploit Version Scan**](#metasploit-version-scan)
+  - [**Dangerous Settings**](#dangerous-settings)
+    - [**Metasploit Dumping Hashes**](#metasploit-dumping-hashes)
 
 [Intelligent Platform Management Interface](https://www.thomas-krenn.com/en/wiki/IPMI_Basics) (`IPMI`) is a set of standardized specifications for hardware-based host management systems used for system management and monitoring. It acts as an autonomous subsystem and works independently of the host's BIOS, CPU, firmware, and underlying operating system. IPMI provides sysadmins with the ability to manage and monitor systems even if they are powered off or in an unresponsive state. It operates using a direct network connection to the system's hardware and does not require access to the operating system via a login shell. IPMI can also be used for remote upgrades to systems without requiring physical access to the target host. IPMI is typically used in three ways:
 

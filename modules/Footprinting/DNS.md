@@ -1,4 +1,17 @@
 # DNS
+- [DNS](#dns)
+  - [**Default Configuration**](#default-configuration)
+    - [**Local DNS Configuration**](#local-dns-configuration)
+    - [**Zone Files**](#zone-files)
+    - [**Reverse Name Resolution Zone Files**](#reverse-name-resolution-zone-files)
+  - [**Dangerous Settings**](#dangerous-settings)
+- [**Footprinting the Service**](#footprinting-the-service)
+    - [**DIG - NS Query**](#dig---ns-query)
+    - [**DIG - Version Query**](#dig---version-query)
+    - [**DIG - ANY Query**](#dig---any-query)
+    - [**DIG - AXFR Zone Transfer**](#dig---axfr-zone-transfer)
+    - [**DIG - AXFR Zone Transfer - Internal**](#dig---axfr-zone-transfer---internal)
+    - [**Subdomain Brute Forcing**](#subdomain-brute-forcing)
 
 `Domain Name System` (`DNS`) is an integral part of the Internet. For example, through domain names, such as [academy.hackthebox.com](https://academy.hackthebox.com/) or [www.hackthebox.com](https://www.hackthebox.eu/), we can reach the web servers that the hosting provider has assigned one or more specific IP addresses. DNS is a system for resolving computer names into IP addresses, and it does not have a central database. Simplified, we can imagine it like a library with many different phone books. The information is distributed over many thousands of name servers. Globally distributed DNS servers translate domain names into IP addresses and thus control which server a user can reach via a particular domain. There are several types of DNS servers that are used worldwide:
 

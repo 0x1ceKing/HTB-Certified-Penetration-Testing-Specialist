@@ -1,4 +1,18 @@
 # Oracle TNS
+- [Oracle TNS](#oracle-tns)
+  - [**Default Configuration**](#default-configuration)
+    - [**Tnsnames.ora**](#tnsnamesora)
+    - [**Listener.ora**](#listenerora)
+    - [**Oracle-Tools-setup.sh**](#oracle-tools-setupsh)
+    - [**Testing ODAT**](#testing-odat)
+    - [**Nmap**](#nmap)
+    - [**Nmap - SID Bruteforcing**](#nmap---sid-bruteforcing)
+    - [**ODAT**](#odat)
+    - [**SQLplus - Log In**](#sqlplus---log-in)
+    - [**Oracle RDBMS - Interaction**](#oracle-rdbms---interaction)
+    - [**Oracle RDBMS - Database Enumeration**](#oracle-rdbms---database-enumeration)
+    - [**Oracle RDBMS - Extract Password Hashes**](#oracle-rdbms---extract-password-hashes)
+    - [**Oracle RDBMS - File Upload**](#oracle-rdbms---file-upload)
 
 The `Oracle Transparent Network Substrate` (`TNS`) server is a communication protocol that facilitates communication between Oracle databases and applications over networks. Initially introduced as part of the [Oracle Net Services](https://docs.oracle.com/en/database/oracle/oracle-database/18/netag/introducing-oracle-net-services.html) software suite, TNS supports various networking protocols between Oracle databases and client applications, such as `IPX/SPX` and `TCP/IP` protocol stacks. As a result, it has become a preferred solution for managing large, complex databases in the healthcare, finance, and retail industries. In addition, its built-in encryption mechanism ensures the security of data transmitted, making it an ideal solution for enterprise environments where data security is paramount.
 

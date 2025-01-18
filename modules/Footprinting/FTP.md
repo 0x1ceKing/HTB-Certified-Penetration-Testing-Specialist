@@ -1,4 +1,24 @@
 # FTP
+- [FTP](#ftp)
+  - [**TFTP**](#tftp)
+  - [**Default Configuration**](#default-configuration)
+    - [**Install vsFTPd**](#install-vsftpd)
+    - [**vsFTPd Config File**](#vsftpd-config-file)
+    - [**FTPUSERS**](#ftpusers)
+  - [**Dangerous Settings**](#dangerous-settings)
+    - [**Anonymous Login**](#anonymous-login)
+    - [**vsFTPd Status**](#vsftpd-status)
+    - [**vsFTPd Detailed Output**](#vsftpd-detailed-output)
+    - [**Hiding IDs - YES**](#hiding-ids---yes)
+    - [**Recursive Listing**](#recursive-listing)
+    - [**Download a File**](#download-a-file)
+    - [**Download All Available Files**](#download-all-available-files)
+    - [**Upload a File**](#upload-a-file)
+  - [**Footprinting the Service**](#footprinting-the-service)
+    - [**Nmap FTP Scripts**](#nmap-ftp-scripts)
+    - [**Nmap**](#nmap)
+    - [**Nmap Script Trace**](#nmap-script-trace)
+    - [**Service Interaction**](#service-interaction)
 
 The `File Transfer Protocol` (`FTP`) is one of the oldest protocols on the Internet. The FTP runs within the application layer of the TCP/IP protocol stack. Thus, it is on the same layer as `HTTP` or `POP`. These protocols also work with the support of browsers or email clients to perform their services. There are also special FTP programs for the File Transfer Protocol.
 

@@ -1,4 +1,17 @@
 # Windows Remote Management Protocols
+- [Windows Remote Management Protocols](#windows-remote-management-protocols)
+  - [**RDP**](#rdp)
+  - [**Footprinting the Service**](#footprinting-the-service)
+    - [**Nmap**](#nmap)
+    - [**RDP Security Check - Installation**](#rdp-security-check---installation)
+    - [**RDP Security Check**](#rdp-security-check)
+    - [**Initiate an RDP Session**](#initiate-an-rdp-session)
+  - [**WinRM**](#winrm)
+  - [**Footprinting the Service**](#footprinting-the-service-1)
+    - [**Nmap WinRM**](#nmap-winrm)
+  - [**WMI**](#wmi)
+  - [**Footprinting the Service**](#footprinting-the-service-2)
+    - [**WMIexec.py**](#wmiexecpy)
 
 Windows servers can be managed locally using Server Manager administration tasks on remote servers. Remote management is enabled by default starting with Windows Server 2016. Remote management is a component of the Windows hardware management features that manage server hardware locally and remotely. These features include a service that implements the WS-Management protocol, hardware diagnostics and control through baseboard management controllers, and a COM API and script objects that enable us to write applications that communicate remotely through the WS-Management protocol.
 

@@ -1,4 +1,9 @@
 # Staff
+- [Staff](#staff)
+    - [**LinkedIn - Job Post**](#linkedin---job-post)
+    - [**LinkedIn - Employee #1 About**](#linkedin---employee-1-about)
+    - [**Github**](#github)
+    - [**LinkedIn - Employee #2 Career**](#linkedin---employee-2-career)
 
 Employees can be identified on various business networks such as [LinkedIn](https://www.linkedin.com/) or [Xing](https://www.xing.de/). Job postings from companies can also tell us a lot about their infrastructure and give us clues about what we should be looking for.
 
