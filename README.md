@@ -7,6 +7,7 @@
 ### [Network Enumeration with Nmap](/modules/Network%20Enumeration%20with%20Nmap/README.md)
 ### [Footprinting](/modules/Footprinting/README.md)
 ### [Information Gathering - Web Edition](/modules/Information%20Gathering%20-%20Web%20Edition/README.md)
+### [Security Assessments](/modules/Information%20Gathering%20-%20Web%20Edition/README.md)
 ## HackTheBox Certified Penetration Tester CheatSheet 
 * [Getting Started](/cheatsheet/Getting%20Started.md)  
 * [Network Enumeration NMAP](/cheatsheet/Network%20Enumeration%20NMAP.md)  
