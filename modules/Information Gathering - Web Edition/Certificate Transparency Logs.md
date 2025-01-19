@@ -19,25 +19,26 @@ Think of CT logs as a `global registry of certificates`. They provide a transpa
 - `Accountability for Certificate Authorities`: CT logs hold CAs accountable for their issuance practices. If a CA issues a certificate that violates the rules or standards, it will be publicly visible in the logs, leading to potential sanctions or loss of trust.
 - `Strengthening the Web PKI (Public Key Infrastructure)`: The Web PKI is the trust system underpinning secure online communication. CT logs help to enhance the security and integrity of the Web PKI by providing a mechanism for public oversight and verification of certificates.
 - Click to expand a technical breakdown of how CT Logs Work
+    ### The Merkle Tree Structure
+    To ensure CT logs' integrity and tamper-proof nature, they employ a Merkle tree cryptographic structure. This structure organises the certificates in a tree-like fashion, where each leaf node represents a certificate, and each non-leaf node represents a hash of its child nodes. The root of the tree, known as the Merkle root, is a single hash representing the entire log.
+
+    Let's visualise this with a hypothetical Merkle tree for inlanefreight.com:
     
-    # 
-    
-    1. 
-    2. 
-    3. 
-    4. 
-    5. 
-    
-    ### 
-    
-    [https://mermaid.ink/svg/pako:eNqFkk1LxDAQhv9KmIMo7Afb9lRlwdWDFy_qzXjINtMmbNqUbGqRZf-7-TDQlYXmMjPJPPO-kDlBpTlCCY1hvSC7j3vaEXee0NjNJwUfyeZhb9bb23EcV7JTrMPaoGyEXVW6vaPwRZbLLXlhR-EJHxMRcl2TOIXcxCTzzEQnSzpZpPZKN3NCEzxPeB5xjt8zdJZsZlds5slm8c9mkXSKSLFezun80cFxuH3T2vrKjfJpeLn08KgU2aHS40Q9zLrg3QMsoEXTMsnd7518IwUrsEUKpUs5MwcKtDu7PjZY_f7TVVBaM-ACjB4aAWXN1NFVQ8-ZxWfJ3Aq0qQW5tNq8xt0IK3L-BUqZrhE](https://mermaid.ink/svg/pako:eNqFkk1LxDAQhv9KmIMo7Afb9lRlwdWDFy_qzXjINtMmbNqUbGqRZf-7-TDQlYXmMjPJPPO-kDlBpTlCCY1hvSC7j3vaEXee0NjNJwUfyeZhb9bb23EcV7JTrMPaoGyEXVW6vaPwRZbLLXlhR-EJHxMRcl2TOIXcxCTzzEQnSzpZpPZKN3NCEzxPeB5xjt8zdJZsZlds5slm8c9mkXSKSLFezun80cFxuH3T2vrKjfJpeLn08KgU2aHS40Q9zLrg3QMsoEXTMsnd7518IwUrsEUKpUs5MwcKtDu7PjZY_f7TVVBaM-ACjB4aAWXN1NFVQ8-ZxWfJ3Aq0qQW5tNq8xt0IK3L-BUqZrhE)
-    
+    ![](https://mermaid.ink/svg/pako:eNqFkk1LxDAQhv9KmIMo7Afb9lRlwdWDFy_qzXjINtMmbNqUbGqRZf-7-TDQlYXmMjPJPPO-kDlBpTlCCY1hvSC7j3vaEXee0NjNJwUfyeZhb9bb23EcV7JTrMPaoGyEXVW6vaPwRZbLLXlhR-EJHxMRcl2TOIXcxCTzzEQnSzpZpPZKN3NCEzxPeB5xjt8zdJZsZlds5slm8c9mkXSKSLFezun80cFxuH3T2vrKjfJpeLn08KgU2aHS40Q9zLrg3QMsoEXTMsnd7518IwUrsEUKpUs5MwcKtDu7PjZY_f7TVVBaM-ACjB4aAWXN1NFVQ8-ZxWfJ3Aq0qQW5tNq8xt0IK3L-BUqZrhE)
+
+    In this hypothetical tree:
+
+    - `Root Hash`: The topmost node, a single hash representing the entire log's state.
+    - `Hash 1 & Hash 2`: Intermediate nodes, each a hash of two child nodes (either certificates or other hashes).
+    - `Cert 1 - Cert 4`: Leaf nodes representing individual SSL/TLS certificates for different subdomains of `inlanefreight.com`.
     - 
-    - 
-    - 
-    1. 
-    2. 
-    3. 
+    This structure allows for efficient verification of any certificate in the log. By providing the Merkle path (a series of hashes) for a particular certificate, anyone can verify that it is included in the log without downloading the entire log. For instance, to verify Cert 2 (blog.inlanefreight.com), you would need:
+
+    1. `Cert 2's hash`: This directly verifies the certificate itself.
+    2. `Hash 1`: Verifies that Cert 2's hash is correctly paired with Cert 1's hash.
+    3. `Root Hash`: Confirms that Hash 1 is a valid part of the overall log structure.
+   
+   This process ensures that even if a single bit of data in a certificate or the log itself is altered, the root hash will change, immediately signaling tampering. This makes CT logs an invaluable tool for maintaining the integrity and trustworthiness of SSL/TLS certificates, ultimately enhancing internet security.
 
 ## **CT Logs and Web Recon**
 
