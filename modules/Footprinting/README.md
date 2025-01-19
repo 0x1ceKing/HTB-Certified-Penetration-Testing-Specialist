@@ -1,39 +1,39 @@
-# Footprinting
+# **Footprinting**
 
-- ## Infrastructure Based Enumeration
+- ## **Infrastructure Based Enumeration**
 
-  - ### [Domain Information](./Domain%20Information.md)
+  - ### [**Domain Information**](./Domain%20Information.md)
 
-  - ### [Cloud Resources](./Cloud%20Resources.md)
+  - ### [**Cloud Resources**](./Cloud%20Resources.md)
 
-  - ### [Staff](./Staff.md)
+  - ### [**Staff**](./Staff.md)
 
-- ## Host Based Enumeration
+- ## **Host Based Enumeration**
 
-  - ### [FTP](./FTP.md)
+  - ### [**FTP**](./FTP.md)
 
-  - ### [SMB](./SMB.md)
+  - ### [**SMB**](./SMB.md)
 
-  - ### [NFS](./NFS.md)
+  - ### [**NFS**](./NFS.md)
 
-  - ### [DNS](./DNS.md)
+  - ### [**DNS**](./DNS.md)
 
-  - ### [SMTP](./SMTP.md)
+  - ### [**SMTP**](./SMTP.md)
 
-  - ### [IMAP/POP3](./IMAP%20POP3.md)
+  - ### [**IMAP/POP3**](./IMAP%20POP3.md)
 
-  - ### [SNMP](./SNMP.md)
+  - ### [**SNMP**](./SNMP.md)
 
-  - ### [MySQL](./MySQL.md)
+  - ### [**MySQL**](./MySQL.md)
 
-  - ### [MSSQL](./MSSQL.md)
+  - ### [**MSSQL**](./MSSQL.md)
 
-  - ### [Oracle TNS](./Oracle%20TNS.md)
+  - ### [**Oracle TNS**](./Oracle%20TNS.md)
 
-  - ### [IPMI](./IPMI.md)
+  - ### [**IPMI**](./IPMI.md)
 
-- ## Remote Management Protocols
+- ## **Remote Management Protocols**
+  
+  - ### [**Linux Remote Management Protocols**](./Linux%20Remote%20Management%20Protocols.md)
 
-  - ### [Linux Remote Management Protocols](./Linux%20Remote%20Management%20Protocols.md)
-
-  - ### [Windows Remote Management Protocols](./Windows%20Remote%20Management%20Protocols.md)
+  - ### [**Windows Remote Management Protocols**](./Windows%20Remote%20Management%20Protocols.md)
