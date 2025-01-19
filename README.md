@@ -8,6 +8,7 @@
 ### [Footprinting](/modules/Footprinting/README.md)
 ### [Information Gathering - Web Edition](/modules/Information%20Gathering%20-%20Web%20Edition/README.md)
 ### [Security Assessments](/modules/Security%20Assessments/README.md)
+### [File Transfers](/modules/File%20Transfers/README.md)
 ## HackTheBox Certified Penetration Tester CheatSheet 
 * [Getting Started](/cheatsheet/Getting%20Started.md)  
 * [Network Enumeration NMAP](/cheatsheet/Network%20Enumeration%20NMAP.md)  
