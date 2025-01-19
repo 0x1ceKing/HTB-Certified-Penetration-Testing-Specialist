@@ -24,8 +24,9 @@ Think of CT logs as a `global registry of certificates`. They provide a transpa
 
     Let's visualise this with a hypothetical Merkle tree for inlanefreight.com:
     
-    ![](https://mermaid.ink/svg/pako:eNqFkk1LxDAQhv9KmIMo7Afb9lRlwdWDFy_qzXjINtMmbNqUbGqRZf-7-TDQlYXmMjPJPPO-kDlBpTlCCY1hvSC7j3vaEXee0NjNJwUfyeZhb9bb23EcV7JTrMPaoGyEXVW6vaPwRZbLLXlhR-EJHxMRcl2TOIXcxCTzzEQnSzpZpPZKN3NCEzxPeB5xjt8zdJZsZlds5slm8c9mkXSKSLFezun80cFxuH3T2vrKjfJpeLn08KgU2aHS40Q9zLrg3QMsoEXTMsnd7518IwUrsEUKpUs5MwcKtDu7PjZY_f7TVVBaM-ACjB4aAWXN1NFVQ8-ZxWfJ3Aq0qQW5tNq8xt0IK3L-BUqZrhE)
-
+    <div style="text-align: center;">
+    <img src="https://mermaid.ink/svg/pako:eNqFkk1LxDAQhv9KmIMo7Afb9lRlwdWDFy_qzXjINtMmbNqUbGqRZf-7-TDQlYXmMjPJPPO-kDlBpTlCCY1hvSC7j3vaEXee0NjNJwUfyeZhb9bb23EcV7JTrMPaoGyEXVW6vaPwRZbLLXlhR-EJHxMRcl2TOIXcxCTzzEQnSzpZpPZKN3NCEzxPeB5xjt8zdJZsZlds5slm8c9mkXSKSLFezun80cFxuH3T2vrKjfJpeLn08KgU2aHS40Q9zLrg3QMsoEXTMsnd7518IwUrsEUKpUs5MwcKtDu7PjZY_f7TVVBaM-ACjB4aAWXN1NFVQ8-ZxWfJ3Aq0qQW5tNq8xt0IK3L-BUqZrhE" alt="Description" width="600">
+    </div>
     In this hypothetical tree:
 
     - `Root Hash`: The topmost node, a single hash representing the entire log's state.
