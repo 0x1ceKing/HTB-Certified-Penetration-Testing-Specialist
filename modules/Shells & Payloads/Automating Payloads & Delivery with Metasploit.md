@@ -20,6 +20,7 @@ Let's start working hands-on with Metasploit by launching the Metasploit framewo
 
 ```
 th1nyunb0y@htb[/htb]$ sudo msfconsole
+
 IIIIII    dTb.dTb        _.---._
   II     4'  v  'B   .'"".'/|\`.""'.
   II     6.     .P  :  .' / | \ `.  :
@@ -38,7 +39,6 @@ Metasploit tip: Writing a custom module? After editing your
 module, why not try the reload command
 
 msf6 >
-
 ```
 
 We can see there is creative ASCII art presented as the banner at launch and some numbers of particular interest.
@@ -53,7 +53,9 @@ In this case, we will be using enumeration results from a `nmap` scan to pick 
 ### **NMAP Scan**
 
 ```
-th1nyunb0y@htb[/htb]$ nmap -sC -sV -Pn 10.129.164.25Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+th1nyunb0y@htb[/htb]$ nmap -sC -sV -Pn 10.129.164.25
+
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-09-09 21:03 UTC
 Nmap scan report for 10.129.164.25
 Host is up (0.020s latency).

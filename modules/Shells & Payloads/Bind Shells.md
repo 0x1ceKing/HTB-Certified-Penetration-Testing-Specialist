@@ -56,7 +56,9 @@ Back on the client (attack box), we will use nc to connect to the listener we st
 ### **No. 2: Client - Attack box connecting to target**
 
 ```
-th1nyunb0y@htb[/htb]$ nc -nv 10.129.41.200 7777Connection to 10.129.41.200 7777 port [tcp/*] succeeded!
+th1nyunb0y@htb[/htb]$ nc -nv 10.129.41.200 7777
+
+Connection to 10.129.41.200 7777 port [tcp/*] succeeded!
 ```
 
 Notice how we are using nc on the client and the server. On the client-side, we specify the server's IP address and the port that we configured to listen on (`7777`). Once we successfully connect, we can see a `succeeded!` message on the client as shown above and a `received!` message on the server, as seen below.
@@ -64,7 +66,9 @@ Notice how we are using nc on the client and the server. On the client-side, we 
 ### **No. 3: Server - Target receiving connection from client**
 
 ```
-Target@server:~$ nc -lvnp 7777Listening on [0.0.0.0] (family 0, port 7777)
+Target@server:~$ nc -lvnp 7777
+
+Listening on [0.0.0.0] (family 0, port 7777)
 Connection from 10.10.14.117 51872 received!
 ```
 
@@ -73,7 +77,9 @@ Know that this is not a proper shell. It is just a Netcat TCP session we have es
 ### **No. 4: Client - Attack box sending message Hello Academy**
 
 ```
-th1nyunb0y@htb[/htb]$ nc -nv 10.129.41.200 7777Connection to 10.129.41.200 7777 port [tcp/*] succeeded!
+th1nyunb0y@htb[/htb]$ nc -nv 10.129.41.200 7777
+
+Connection to 10.129.41.200 7777 port [tcp/*] succeeded!
 Hello Academy
 ```
 
@@ -82,7 +88,9 @@ Once we type the message and hit enter, we will notice the message is received o
 ### **No. 5: Server - Target receiving Hello Academy message**
 
 ```
-Victim@server:~$ nc -lvnp 7777Listening on [0.0.0.0] (family 0, port 7777)
+Victim@server:~$ nc -lvnp 7777
+
+Listening on [0.0.0.0] (family 0, port 7777)
 Connection from 10.10.14.117 51914 received!
 Hello Academy
 ```
@@ -110,7 +118,9 @@ Back on the client, use Netcat to connect to the server now that a shell on the 
 ### **No. 2: Client - Connecting to bind shell on target**
 
 ```
-th1nyunb0y@htb[/htb]$ nc -nv 10.129.41.200 7777Target@server:~$
+th1nyunb0y@htb[/htb]$ nc -nv 10.129.41.200 7777
+
+Target@server:~$
 ```
 
 We will notice that we have successfully established a bind shell session with the target. Keep in mind that we had complete control over both our attack box and the target system in this scenario, which isn't typical. We worked through these exercises to understand the basics of the bind shell and how it works without any security controls (NAT enabled routers, hardware firewalls, Web Application Firewalls, IDS, IPS, OS firewalls, endpoint protection, authentication mechanisms, etc...) in place or exploits needed. This fundamental understanding will be helpful as we get into more challenging situations and realistic scenarios working with vulnerable systems.

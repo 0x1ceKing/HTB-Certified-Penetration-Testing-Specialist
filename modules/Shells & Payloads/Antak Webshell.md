@@ -41,7 +41,9 @@ Antak is a web shell built-in ASP.Net included within the [Nishang project](htt
 The Antak files can be found in the `/usr/share/nishang/Antak-WebShell` directory.
 
 ```
-th1nyunb0y@htb[/htb]$ ls /usr/share/nishang/Antak-WebShellantak.aspx  Readme.md
+th1nyunb0y@htb[/htb]$ ls /usr/share/nishang/Antak-WebShell
+
+antak.aspx  Readme.md
 ```
 
 Antak web shell functions like a Powershell Console. However, it will execute each command as a new process. It can also execute scripts in memory and encode commands you send. As a web shell, Antak is a pretty powerful tool.

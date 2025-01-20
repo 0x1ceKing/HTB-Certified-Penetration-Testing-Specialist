@@ -48,7 +48,9 @@ As soon as we selected the icon, it opened the MATE terminal emulator applicatio
 ### **Shell Validation From 'ps'**
 
 ```
-th1nyunb0y@htb[/htb]$ ps    PID TTY          TIME CMD
+th1nyunb0y@htb[/htb]$ ps
+
+    PID TTY          TIME CMD
    4232 pts/1    00:00:00 bash
   11435 pts/1    00:00:00 ps
 ```
@@ -58,7 +60,9 @@ We can also find out what shell language is in use by viewing the environment va
 ### **Shell Validation Using 'env'**
 
 ```
-th1nyunb0y@htb[/htb]$ envSHELL=/bin/bash
+th1nyunb0y@htb[/htb]$ env
+
+SHELL=/bin/bash
 ```
 
 Now let's select the blue square icon at the top of the screen in Pwnbox.

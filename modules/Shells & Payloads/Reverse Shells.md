@@ -82,7 +82,9 @@ Once AV is disabled, attempt to execute the code again.
 ### **Server (attack box)**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nc -lvnp 443Listening on 0.0.0.0 443
+th1nyunb0y@htb[/htb]$ sudo nc -lvnp 443
+
+Listening on 0.0.0.0 443
 Connection received on 10.129.36.68 49674
 
 PS C:\Users\htb-student> whoami

