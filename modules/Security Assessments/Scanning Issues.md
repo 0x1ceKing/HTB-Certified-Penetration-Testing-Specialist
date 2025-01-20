@@ -34,7 +34,9 @@ th1nyunb0y@htb[/htb]$ sudo apt install vnstat
 Let's monitor the `eth0` network adapter before running a Nessus scan:
 
 ```
-th1nyunb0y@htb[/htb]$ sudo vnstat -l -i eth0Monitoring eth0...    (press CTRL-C to stop)
+th1nyunb0y@htb[/htb]$ sudo vnstat -l -i eth0
+
+Monitoring eth0...    (press CTRL-C to stop)
 
    rx:       332 bit/s     0 p/s          tx:       332 bit/s     0 p/s
 
@@ -63,7 +65,9 @@ th1nyunb0y@htb[/htb]$ sudo vnstat -l -i eth0Monitoring eth0...    (press CTRL-C 
 We can compare this result with the result we get when monitoring the same interface during a Nessus scan against just one host:
 
 ```
-th1nyunb0y@htb[/htb]$ sudo vnstat -l -i eth0Monitoring eth0...    (press CTRL-C to stop)
+th1nyunb0y@htb[/htb]$ sudo vnstat -l -i eth0
+
+Monitoring eth0...    (press CTRL-C to stop)
 
    rx:   307.92 kbit/s   641 p/s          tx:   380.41 kbit/s   767 p/s^C
 

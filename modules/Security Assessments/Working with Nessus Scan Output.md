@@ -30,7 +30,9 @@ Nessus also gives the option to export scans into two formats `Nessus (scan.nes
 Scripts such as the [nessus-report-downloader](https://raw.githubusercontent.com/eelsivart/nessus-report-downloader/master/nessus6-report-downloader.rb) can be used to quickly download scan results in all available formats from the CLI using the Nessus REST API:
 
 ```
-th1nyunb0y@htb[/htb]$ ./nessus_downloader.rb Nessus 6 Report Downloader 1.0
+th1nyunb0y@htb[/htb]$ ./nessus_downloader.rb 
+
+Nessus 6 Report Downloader 1.0
 
 Enter the Nessus Server IP: 127.0.0.1
 Enter the Nessus Server Port [8834]: 8834

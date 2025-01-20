@@ -29,7 +29,9 @@ Next, we can visit the [Activation Code Page](https://www.tenable.com/products/n
 With both the binary and activation code in hand, we can now install the Nessus package:
 
 ```
-th1nyunb0y@htb[/htb]$ dpkg -i Nessus-8.15.1-ubuntu910_amd64.debSelecting previously unselected package nessus.
+th1nyunb0y@htb[/htb]$ dpkg -i Nessus-8.15.1-ubuntu910_amd64.deb
+
+Selecting previously unselected package nessus.
 (Reading database ... 132030 files and directories currently installed.)
 Preparing to unpack Nessus-8.15.1-ubuntu910_amd64.deb ...
 Unpacking nessus (8.15.1) ...

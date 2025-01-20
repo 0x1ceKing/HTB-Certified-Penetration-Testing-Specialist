@@ -16,7 +16,9 @@ We will get started with using OpenVAS by following the installation instruction
 First, we can start by installing the tool:
 
 ```
-th1nyunb0y@htb[/htb]$ sudo apt-get update && apt-get -y full-upgradeth1nyunb0y@htb[/htb]$ sudo apt-get install gvm && openvas
+th1nyunb0y@htb[/htb]$ sudo apt-get update && apt-get -y full-upgrade
+
+th1nyunb0y@htb[/htb]$ sudo apt-get install gvm && openvas
 ```
 
 Next, to begin the installation process, we can run the following command below:

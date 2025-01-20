@@ -42,8 +42,9 @@ Plugins are rated by severity level: `Critical`, `High`, `Medium`, `Low`, `
 The `Plugins` tab provides more information on a particular detection, including mitigation. When conducting recurring scans, there may be a vulnerability/detection that, upon further examination, is not considered to be an issue. For example, Microsoft DirectAccess (a technology that provides internal network connectivity to clients over the Internet) allows insecure and null cipher suites. The below scan performed with `sslscan` shows an example of insecure and null cipher suites:
 
 ```
-th1nyunb0y@htb[/htb]$ sslscan example.com<SNIP>
+th1nyunb0y@htb[/htb]$ sslscan example.com
 
+<SNIP>
 Preferred TLSv1.0  128 bits  ECDHE-RSA-AES128-SHA          Curve 25519 DHE 253
 Accepted  TLSv1.0  256 bits  ECDHE-RSA-AES256-SHA          Curve 25519 DHE 253
 Accepted  TLSv1.0  128 bits  DHE-RSA-AES128-SHA            DHE 2048 bits
