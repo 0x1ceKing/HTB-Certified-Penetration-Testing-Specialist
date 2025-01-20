@@ -18,7 +18,9 @@ While we run various scans, we should always save the results. We can use these 
 We can also specify the option (`-oA`) to save the results in all formats. The command could look like this:
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p- -oA targetStarting Nmap 7.80 ( https://nmap.org ) at 2020-06-16 12:14 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p- -oA target
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-16 12:14 CEST
 Nmap scan report for 10.129.2.28
 Host is up (0.0091s latency).
 Not shown: 65525 closed ports
@@ -46,7 +48,10 @@ th1nyunb0y@htb[/htb]$ lstarget.gnmap target.xml  target.nmap
 ### **Normal Output**
 
 ```
-th1nyunb0y@htb[/htb]$ cat target.nmap# Nmap 7.80 scan initiated Tue Jun 16 12:14:53 2020 as: nmap -p- -oA target 10.129.2.28Nmap scan report for 10.129.2.28
+th1nyunb0y@htb[/htb]$ cat target.nmap
+
+# Nmap 7.80 scan initiated Tue Jun 16 12:14:53 2020 as: nmap -p- -oA target 10.129.2.28
+Nmap scan report for 10.129.2.28
 Host is up (0.053s latency).
 Not shown: 4 closed ports
 PORT   STATE SERVICE
@@ -61,7 +66,10 @@ MAC Address: DE:AD:00:00:BE:EF (Intel Corporate)
 ### **Grepable Output**
 
 ```
-th1nyunb0y@htb[/htb]$ cat target.gnmap# Nmap 7.80 scan initiated Tue Jun 16 12:14:53 2020 as: nmap -p- -oA target 10.129.2.28Host: 10.129.2.28 ()	Status: Up
+th1nyunb0y@htb[/htb]$ cat target.gnmap
+
+# Nmap 7.80 scan initiated Tue Jun 16 12:14:53 2020 as: nmap -p- -oA target 10.129.2.28
+Host: 10.129.2.28 ()	Status: Up
 Host: 10.129.2.28 ()	Ports: 22/open/tcp//ssh///, 25/open/tcp//smtp///, 80/open/tcp//http///	Ignored State: closed (4)
 # Nmap done at Tue Jun 16 12:14:53 2020 -- 1 IP address (1 host up) scanned in 10.22 seconds
 ```
@@ -69,7 +77,9 @@ Host: 10.129.2.28 ()	Ports: 22/open/tcp//ssh///, 25/open/tcp//smtp///, 80/open/t
 ### **XML Output**
 
 ```
-th1nyunb0y@htb[/htb]$ cat target.xml<?xml version="1.0" encoding="UTF-8"?>
+th1nyunb0y@htb[/htb]$ cat target.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nmaprun>
 <?xml-stylesheet href="file:///usr/local/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
 <!-- Nmap 7.80 scan initiated Tue Jun 16 12:14:53 2020 as: nmap -p- -oA target 10.129.2.28 -->

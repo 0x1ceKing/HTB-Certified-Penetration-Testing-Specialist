@@ -31,7 +31,9 @@ SYN Stealth Scan Timing: About 3.64% done; ETC: 19:45 (0:00:53 remaining)
 Another option (`--stats-every=5s`) that we can use is defining how periods of time the status should be shown. Here we can specify the number of seconds (`s`) or minutes (`m`), after which we want to get the status.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p- -sV --stats-every=5sStarting Nmap 7.80 ( https://nmap.org ) at 2020-06-15 19:46 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p- -sV --stats-every=5s
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-15 19:46 CEST
 Stats: 0:00:05 elapsed; 0 hosts completed (1 up), 1 undergoing SYN Stealth Scan
 SYN Stealth Scan Timing: About 13.91% done; ETC: 19:49 (0:00:31 remaining)
 Stats: 0:00:10 elapsed; 0 hosts completed (1 up), 1 undergoing SYN Stealth Scan
@@ -51,7 +53,9 @@ SYN Stealth Scan Timing: About 39.57% done; ETC: 19:48 (0:00:15 remaining)
 We can also increase the `verbosity level` (`-v` / `-vv`), which will show us the open ports directly when `Nmap` detects them.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p- -sV -v Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-15 20:03 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p- -sV -v 
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-15 20:03 CEST
 NSE: Loaded 45 scripts for scanning.
 Initiating ARP Ping Scan at 20:03
 Scanning 10.129.2.28 [1 port]
@@ -85,7 +89,9 @@ Discovered open port 22/tcp on 10.129.2.28
 Once the scan is complete, we will see all TCP ports with the corresponding service and their versions that are active on the system.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p- -sVStarting Nmap 7.80 ( https://nmap.org ) at 2020-06-15 20:00 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p- -sV
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-15 20:00 CEST
 Nmap scan report for 10.129.2.28
 Host is up (0.013s latency).
 Not shown: 65525 closed ports
@@ -118,7 +124,9 @@ Nmap done: 1 IP address (1 host up) scanned in 91.73 seconds
 Primarily, `Nmap` looks at the banners of the scanned ports and prints them out. If it cannot identify versions through the banners, `Nmap` attempts to identify them through a signature-based matching system, but this significantly increases the scan's duration. One disadvantage to `Nmap`'s presented results is that the automatic scan can miss some information because sometimes `Nmap` does not know how to handle it. Let us look at an example of this.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p- -sV -Pn -n --disable-arp-ping --packet-traceStarting Nmap 7.80 ( https://nmap.org ) at 2020-06-16 20:10 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p- -sV -Pn -n --disable-arp-ping --packet-trace
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-16 20:10 CEST
 <SNIP>
 NSOCK INFO [0.4200s] nsock_trace_handler_callback(): Callback: READ SUCCESS for EID 18 [10.129.2.28:25] (35 bytes): 220 inlane ESMTP Postfix (Ubuntu)..
 Service scan match (Probe NULL matched with NULL line 3104): 10.129.2.28:25 is smtp.  Version: |Postfix smtpd|||
@@ -156,7 +164,9 @@ Then we see that the SMTP server on our target gave us more information than `N
 ### **Tcpdump**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo tcpdump -i eth0 host 10.10.14.2 and 10.129.2.28tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+th1nyunb0y@htb[/htb]$ sudo tcpdump -i eth0 host 10.10.14.2 and 10.129.2.28
+
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
 listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
 
 ```
@@ -164,7 +174,9 @@ listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
 ### **NC**
 
 ```
-th1nyunb0y@htb[/htb]$  nc -nv 10.129.2.28 25Connection to 10.129.2.28 port 25 [tcp/*] succeeded!
+th1nyunb0y@htb[/htb]$  nc -nv 10.129.2.28 25
+
+Connection to 10.129.2.28 port 25 [tcp/*] succeeded!
 220 inlane ESMTP Postfix (Ubuntu)
 
 ```

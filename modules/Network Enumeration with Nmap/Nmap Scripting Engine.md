@@ -52,7 +52,9 @@ For example, let us keep working with the target SMTP port and see the results w
 ### **Nmap - Specifying Scripts**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 25 --script banner,smtp-commandsStarting Nmap 7.80 ( https://nmap.org ) at 2020-06-16 23:21 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 25 --script banner,smtp-commands
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-16 23:21 CEST
 Nmap scan report for 10.129.2.28
 Host is up (0.050s latency).
 
@@ -74,7 +76,9 @@ We see that we can recognize the **Ubuntu** distribution of Linux by using the
 ### **Nmap - Aggressive Scan**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 80 -AStarting Nmap 7.80 ( https://nmap.org ) at 2020-06-17 01:38 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 80 -A
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-17 01:38 CEST
 Nmap scan report for 10.129.2.28
 Host is up (0.012s latency).
 
@@ -116,7 +120,9 @@ Now let us move on to HTTP port 80 and see what information and vulnerabilities 
 ### **Nmap - Vuln Category**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 80 -sV --script vuln Nmap scan report for 10.129.2.28
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 80 -sV --script vuln 
+
+Nmap scan report for 10.129.2.28
 Host is up (0.036s latency).
 
 PORT   STATE SERVICE VERSION

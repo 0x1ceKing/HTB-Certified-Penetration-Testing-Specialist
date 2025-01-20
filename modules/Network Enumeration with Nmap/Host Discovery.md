@@ -12,7 +12,9 @@ It is always recommended to store every single scan. This can later be used for 
 ## **Scan Network Range**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -sn -oA tnet | grep for | cut -d" " -f510.129.2.4
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -sn -oA tnet | grep for | cut -d" " -f5
+
+10.129.2.4
 10.129.2.10
 10.129.2.11
 10.129.2.18
@@ -38,7 +40,9 @@ During an internal penetration test, it is not uncommon for us to be provided wi
 Such a list could look something like this:
 
 ```
-th1nyunb0y@htb[/htb]$ cat hosts.lst10.129.2.4
+th1nyunb0y@htb[/htb]$ cat hosts.lst
+
+10.129.2.4
 10.129.2.10
 10.129.2.11
 10.129.2.18
@@ -50,7 +54,9 @@ th1nyunb0y@htb[/htb]$ cat hosts.lst10.129.2.4
 If we use the same scanning technique on the predefined list, the command will look like this:
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap -sn -oA tnet -iL hosts.lst | grep for | cut -d" " -f510.129.2.18
+th1nyunb0y@htb[/htb]$ sudo nmap -sn -oA tnet -iL hosts.lst | grep for | cut -d" " -f5
+
+10.129.2.18
 10.129.2.19
 10.129.2.20
 ```
@@ -70,7 +76,9 @@ In this example, we see that only 3 of 7 hosts are active. Remember, this may me
 It can also happen that we only need to scan a small part of a network. An alternative to the method we used last time is to specify multiple IP addresses.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap -sn -oA tnet 10.129.2.18 10.129.2.19 10.129.2.20| grep for | cut -d" " -f510.129.2.18
+th1nyunb0y@htb[/htb]$ sudo nmap -sn -oA tnet 10.129.2.18 10.129.2.19 10.129.2.20| grep for | cut -d" " -f5
+
+10.129.2.18
 10.129.2.19
 10.129.2.20
 ```
@@ -90,7 +98,9 @@ th1nyunb0y@htb[/htb]$ sudo nmap -sn -oA tnet 10.129.2.18-20| grep for | cut -d" 
 Before we scan a single host for open ports and its services, we first have to determine if it is alive or not. For this, we can use the same method as before.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.18 -sn -oA host Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-14 23:59 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.18 -sn -oA host 
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-14 23:59 CEST
 Nmap scan report for 10.129.2.18
 Host is up (0.087s latency).
 MAC Address: DE:AD:00:00:BE:EF
@@ -128,7 +138,9 @@ Nmap done: 1 IP address (1 host up) scanned in 0.05 seconds
 Another way to determine why Nmap has our target marked as "alive" is with the "`--reason`" option.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.18 -sn -oA host -PE --reason Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-15 00:10 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.18 -sn -oA host -PE --reason 
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-15 00:10 CEST
 SENT (0.0074s) ARP who-has 10.129.2.18 tell 10.10.14.2
 RCVD (0.0309s) ARP reply 10.129.2.18 is-at DE:AD:00:00:BE:EF
 Nmap scan report for 10.129.2.18
@@ -150,7 +162,9 @@ Nmap done: 1 IP address (1 host up) scanned in 0.03 seconds
 We see here that `Nmap` does indeed detect whether the host is alive or not through the `ARP request` and `ARP reply` alone. To disable ARP requests and scan our target with the desired `ICMP echo requests`, we can disable ARP pings by setting the "`--disable-arp-ping`" option. Then we can scan our target again and look at the packets sent and received.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.18 -sn -oA host -PE --packet-trace --disable-arp-ping Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-15 00:12 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.18 -sn -oA host -PE --packet-trace --disable-arp-ping 
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-15 00:12 CEST
 SENT (0.0107s) ICMP [10.10.14.2 > 10.129.2.18 Echo request (type=8/code=0) id=13607 seq=0] IP [ttl=255 id=23541 iplen=28 ]
 RCVD (0.0152s) ICMP [10.129.2.18 > 10.10.14.2 Echo reply (type=0/code=0) id=13607 seq=0] IP [ttl=128 id=40622 iplen=28 ]
 Nmap scan report for 10.129.2.18

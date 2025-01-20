@@ -28,14 +28,18 @@ When Nmap sends a packet, it takes some time (`Round-Trip-Time` - `RTT`) to re
 ### **Default Scan**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F<SNIP>
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F
+
+<SNIP>
 Nmap done: 256 IP addresses (10 hosts up) scanned in 39.44 seconds
 ```
 
 ### **Optimized RTT**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F --initial-rtt-timeout 50ms --max-rtt-timeout 100ms<SNIP>
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F --initial-rtt-timeout 50ms --max-rtt-timeout 100ms
+
+<SNIP>
 Nmap done: 256 IP addresses (8 hosts up) scanned in 12.29 seconds
 ```
 
@@ -57,13 +61,17 @@ Another way to increase scan speed is by specifying the retry rate of sent packe
 ### **Default Scan**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F | grep "/tcp" | wc -l23
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F | grep "/tcp" | wc -l
+
+23
 ```
 
 ### **Reduced Retries**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F --max-retries 0 | grep "/tcp" | wc -l21
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F --max-retries 0 | grep "/tcp" | wc -l
+
+21
 ```
 
 | **Scanning Options** | **Description** |
@@ -83,14 +91,18 @@ During a white-box penetration test, we may get whitelisted for the security sys
 ### **Default Scan**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F -oN tnet.default<SNIP>
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F -oN tnet.default
+
+<SNIP>
 Nmap done: 256 IP addresses (10 hosts up) scanned in 29.83 seconds
 ```
 
 ### **Optimized Scan**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F -oN tnet.minrate300 --min-rate 300<SNIP>
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.0/24 -F -oN tnet.minrate300 --min-rate 300
+
+<SNIP>
 Nmap done: 256 IP addresses (10 hosts up) scanned in 8.67 seconds
 ```
 
