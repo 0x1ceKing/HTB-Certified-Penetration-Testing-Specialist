@@ -49,7 +49,8 @@ We'll first start Netcat (`nc`) on the compromised machine, listening with optio
 ### **NetCat - Compromised Machine - Listening on Port 8000**
 
 ```
-victim@target:~$ # Example using Original Netcatvictim@target:~$ nc -l -p 8000 > SharpKatz.exe
+victim@target:~$ # Example using Original Netcat
+victim@target:~$ nc -l -p 8000 > SharpKatz.exe
 ```
 
 If the compromised machine is using Ncat, we'll need to specify `--recv-only` to close the connection once the file transfer is finished.

