@@ -81,7 +81,9 @@ By default, ports `110` and `995` are used for POP3, and ports `143` and 
 ### **Nmap**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -sV -p110,143,993,995 -sCStarting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 22:09 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -sV -p110,143,993,995 -sC
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 22:09 CEST
 Nmap scan report for 10.129.14.128
 Host is up (0.00026s latency).
 
@@ -119,14 +121,18 @@ If we successfully figure out the access credentials for one of the employees, a
 ### **cURL**
 
 ```
-th1nyunb0y@htb[/htb]$ curl -k 'imaps://10.129.14.128' --user user:p4ssw0rd* LIST (\HasNoChildren) "." Important
+th1nyunb0y@htb[/htb]$ curl -k 'imaps://10.129.14.128' --user user:p4ssw0rd
+
+* LIST (\HasNoChildren) "." Important
 * LIST (\HasNoChildren) "." INBOX
 ```
 
 If we also use the `verbose` (`-v`) option, we will see how the connection is made. From this, we can see the version of TLS used for encryption, further details of the SSL certificate, and even the banner, which will often contain the version of the mail server.
 
 ```
-th1nyunb0y@htb[/htb]$ curl -k 'imaps://10.129.14.128' --user cry0l1t3:1234 -v*   Trying 10.129.14.128:993...
+th1nyunb0y@htb[/htb]$ curl -k 'imaps://10.129.14.128' --user cry0l1t3:1234 -v
+
+*   Trying 10.129.14.128:993...
 * TCP_NODELAY set
 * Connected to 10.129.14.128 (10.129.14.128) port 993 (#0)* successfully set certificate verify locations:
 *   CAfile: /etc/ssl/certs/ca-certificates.crt
@@ -170,7 +176,9 @@ To interact with the IMAP or POP3 server over SSL, we can use `openssl`, as wel
 ### **OpenSSL - TLS Encrypted Interaction POP3**
 
 ```
-th1nyunb0y@htb[/htb]$ openssl s_client -connect 10.129.14.128:pop3sCONNECTED(00000003)
+th1nyunb0y@htb[/htb]$ openssl s_client -connect 10.129.14.128:pop3s
+
+CONNECTED(00000003)
 Can't use SSL_get_servername
 depth=0 C = US, ST = California, L = Sacramento, O = Inlanefreight, OU = Customer Support, CN = mail1.inlanefreight.htb, emailAddress = cry0l1t3@inlanefreight.htb
 verify error:num=18:self signed certificate
@@ -223,7 +231,9 @@ read R BLOCK
 ### **OpenSSL - TLS Encrypted Interaction IMAP**
 
 ```
-th1nyunb0y@htb[/htb]$ openssl s_client -connect 10.129.14.128:imapsCONNECTED(00000003)
+th1nyunb0y@htb[/htb]$ openssl s_client -connect 10.129.14.128:imaps
+
+CONNECTED(00000003)
 Can't use SSL_get_servername
 depth=0 C = US, ST = California, L = Sacramento, O = Inlanefreight, OU = Customer Support, CN = mail1.inlanefreight.htb, emailAddress = cry0l1t3@inlanefreight.htb
 verify error:num=18:self signed certificate

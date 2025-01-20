@@ -42,7 +42,9 @@ Scanning the RDP service can quickly give us a lot of information about the host
 ### **Nmap**
 
 ```
-th1nyunb0y@htb[/htb]$ nmap -sV -sC 10.129.201.248 -p3389 --script rdp*Starting Nmap 7.92 ( https://nmap.org ) at 2021-11-06 15:45 CET
+th1nyunb0y@htb[/htb]$ nmap -sV -sC 10.129.201.248 -p3389 --script rdp*
+
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-11-06 15:45 CET
 Nmap scan report for 10.129.201.248
 Host is up (0.036s latency).
 
@@ -71,7 +73,9 @@ Nmap done: 1 IP address (1 host up) scanned in 8.26 seconds
 In addition, we can use `--packet-trace` to track the individual packages and inspect their contents manually. We can see that the `RDP cookies` (`mstshash=nmap`) used by Nmap to interact with the RDP server can be identified by `threat hunters` and various security services such as [Endpoint Detection and Response](https://en.wikipedia.org/wiki/Endpoint_detection_and_response) (`EDR`), and can lock us out as penetration testers on hardened networks.
 
 ```
-th1nyunb0y@htb[/htb]$ nmap -sV -sC 10.129.201.248 -p3389 --packet-trace --disable-arp-ping -nStarting Nmap 7.92 ( https://nmap.org ) at 2021-11-06 16:23 CET
+th1nyunb0y@htb[/htb]$ nmap -sV -sC 10.129.201.248 -p3389 --packet-trace --disable-arp-ping -n
+
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-11-06 16:23 CET
 SENT (0.2506s) ICMP [10.10.14.20 > 10.129.201.248 Echo request (type=8/code=0) id=8338 seq=0] IP [ttl=53 id=5122 iplen=28 ]
 SENT (0.2507s) TCP 10.10.14.20:55516 > 10.129.201.248:443 S ttl=42 id=24195 iplen=44  seq=1926233369 win=1024 <mss 1460>
 SENT (0.2507s) TCP 10.10.14.20:55516 > 10.129.201.248:80 A ttl=55 id=50395 iplen=40  seq=0 win=1024
@@ -79,26 +83,34 @@ SENT (0.2517s) ICMP [10.10.14.20 > 10.129.201.248 Timestamp request (type=13/cod
 RCVD (0.2814s) ICMP [10.129.201.248 > 10.10.14.20 Echo reply (type=0/code=0) id=8338 seq=0] IP [ttl=127 id=38158 iplen=28 ]
 SENT (0.3264s) TCP 10.10.14.20:55772 > 10.129.201.248:3389 S ttl=56 id=274 iplen=44  seq=2635590698 win=1024 <mss 1460>
 RCVD (0.3565s) TCP 10.129.201.248:3389 > 10.10.14.20:55772 SA ttl=127 id=38162 iplen=44  seq=3526777417 win=64000 <mss 1357>
-NSOCK INFO [0.4500s] nsock_iod_new2(): nsock_iod_new (IOD#1)NSOCK INFO [0.4500s] nsock_connect_tcp(): TCP connection requested to 10.129.201.248:3389 (IOD#1) EID 8NSOCK INFO [0.4820s] nsock_trace_handler_callback(): Callback: CONNECT SUCCESS for EID 8 [10.129.201.248:3389]
+NSOCK INFO [0.4500s] nsock_iod_new2(): nsock_iod_new (IOD #1)
+NSOCK INFO [0.4500s] nsock_connect_tcp(): TCP connection requested to 10.129.201.248:3389 (IOD #1) EID 8
+NSOCK INFO [0.4820s] nsock_trace_handler_callback(): Callback: CONNECT SUCCESS for EID 8 [10.129.201.248:3389]
 Service scan sending probe NULL to 10.129.201.248:3389 (tcp)
-NSOCK INFO [0.4830s] nsock_read(): Read request from IOD#1 [10.129.201.248:3389] (timeout: 6000ms) EID 18NSOCK INFO [6.4880s] nsock_trace_handler_callback(): Callback: READ TIMEOUT for EID 18 [10.129.201.248:3389]
+NSOCK INFO [0.4830s] nsock_read(): Read request from IOD #1 [10.129.201.248:3389] (timeout: 6000ms) EID 18
+NSOCK INFO [6.4880s] nsock_trace_handler_callback(): Callback: READ TIMEOUT for EID 18 [10.129.201.248:3389]
 Service scan sending probe TerminalServerCookie to 10.129.201.248:3389 (tcp)
-NSOCK INFO [6.4880s] nsock_write(): Write request for 42 bytes to IOD#1 EID 27 [10.129.201.248:3389]NSOCK INFO [6.4880s] nsock_read(): Read request from IOD#1 [10.129.201.248:3389] (timeout: 5000ms) EID 34NSOCK INFO [6.4880s] nsock_trace_handler_callback(): Callback: WRITE SUCCESS for EID 27 [10.129.201.248:3389]
+NSOCK INFO [6.4880s] nsock_write(): Write request for 42 bytes to IOD #1 EID 27 [10.129.201.248:3389]
+NSOCK INFO [6.4880s] nsock_read(): Read request from IOD #1 [10.129.201.248:3389] (timeout: 5000ms) EID 34
+NSOCK INFO [6.4880s] nsock_trace_handler_callback(): Callback: WRITE SUCCESS for EID 27 [10.129.201.248:3389]
 NSOCK INFO [6.5240s] nsock_trace_handler_callback(): Callback: READ SUCCESS for EID 34 [10.129.201.248:3389] (19 bytes): .........4.........
 Service scan match (Probe TerminalServerCookie matched with TerminalServerCookie line 13640): 10.129.201.248:3389 is ms-wbt-server.  Version: |Microsoft Terminal Services|||
 
 ...SNIP...
 
-NSOCK INFO [6.5610s] nsock_write(): Write request for 54 bytes to IOD#1 EID 27 [10.129.201.248:3389]NSE: TCP 10.10.14.20:36630 > 10.129.201.248:3389 | 00000000: 03 00 00 2a 25 e0 00 00 00 00 00 43 6f 6f 6b 69    *%      Cooki
+NSOCK INFO [6.5610s] nsock_write(): Write request for 54 bytes to IOD #1 EID 27 [10.129.201.248:3389]
+NSE: TCP 10.10.14.20:36630 > 10.129.201.248:3389 | 00000000: 03 00 00 2a 25 e0 00 00 00 00 00 43 6f 6f 6b 69    *%      Cooki
 00000010: 65 3a 20 6d 73 74 73 68 61 73 68 3d 6e 6d 61 70 e: mstshash=nmap
-00000020: 0d 0a 01 00 08 00 0b 00 00 00
+00000020: 0d 0a 01 00 08 00 0b 00 00 00  
 
 ...SNIP...
 
-NSOCK INFO [6.6820s] nsock_write(): Write request for 57 bytes to IOD#2 EID 67 [10.129.201.248:3389]NSOCK INFO [6.6820s] nsock_trace_handler_callback(): Callback: WRITE SUCCESS for EID 67 [10.129.201.248:3389]
+NSOCK INFO [6.6820s] nsock_write(): Write request for 57 bytes to IOD #2 EID 67 [10.129.201.248:3389]
+NSOCK INFO [6.6820s] nsock_trace_handler_callback(): Callback: WRITE SUCCESS for EID 67 [10.129.201.248:3389]
 NSE: TCP 10.10.14.20:36630 > 10.129.201.248:3389 | SEND
-NSOCK INFO [6.6820s] nsock_read(): Read request from IOD#2 [10.129.201.248:3389] (timeout: 5000ms) EID 74NSOCK INFO [6.7180s] nsock_trace_handler_callback(): Callback: READ SUCCESS for EID 74 [10.129.201.248:3389] (211 bytes)
-NSE: TCP 10.10.14.20:36630 < 10.129.201.248:3389 |
+NSOCK INFO [6.6820s] nsock_read(): Read request from IOD #2 [10.129.201.248:3389] (timeout: 5000ms) EID 74
+NSOCK INFO [6.7180s] nsock_trace_handler_callback(): Callback: READ SUCCESS for EID 74 [10.129.201.248:3389] (211 bytes)
+NSE: TCP 10.10.14.20:36630 < 10.129.201.248:3389 | 
 00000000: 30 81 d0 a0 03 02 01 06 a1 81 c8 30 81 c5 30 81 0          0  0
 00000010: c2 a0 81 bf 04 81 bc 4e 54 4c 4d 53 53 50 00 02        NTLMSSP
 00000020: 00 00 00 14 00 14 00 38 00 00 00 35 82 8a e2 b9        8   5
@@ -122,13 +134,16 @@ A Perl script named [rdp-sec-check.pl](https://github.com/CiscoCXSecurity/rdp-s
 ### **RDP Security Check - Installation**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo cpanLoading internal logger. Log::Log4perl recommended for better logging
+th1nyunb0y@htb[/htb]$ sudo cpan
+
+Loading internal logger. Log::Log4perl recommended for better logging
 
 CPAN.pm requires configuration, but most of it can be done automatically.
 If you answer 'no' below, you will enter an interactive dialog for each
 configuration option instead.
 
 Would you like to configure as much as possible automatically? [yes] yes
+
 
 Autoconfiguration complete.
 
@@ -138,6 +153,7 @@ You can re-run configuration any time with 'o conf init' in the CPAN shell
 
 cpan shell -- CPAN exploration and modules installation (v2.27)
 Enter 'h' for help.
+
 
 cpan[1]> install Encoding::BER
 
@@ -151,7 +167,10 @@ Reading '/root/.cpan/sources/authors/01mailrc.txt.gz'
 ### **RDP Security Check**
 
 ```
-th1nyunb0y@htb[/htb]$ git clone https://github.com/CiscoCXSecurity/rdp-sec-check.git && cd rdp-sec-checkth1nyunb0y@htb[/htb]$ ./rdp-sec-check.pl 10.129.201.248Starting rdp-sec-check v0.9-beta ( http://labs.portcullis.co.uk/application/rdp-sec-check/ ) at Sun Nov  7 16:50:32 2021
+th1nyunb0y@htb[/htb]$ git clone https://github.com/CiscoCXSecurity/rdp-sec-check.git && cd rdp-sec-check
+th1nyunb0y@htb[/htb]$ ./rdp-sec-check.pl 10.129.201.248
+
+Starting rdp-sec-check v0.9-beta ( http://labs.portcullis.co.uk/application/rdp-sec-check/ ) at Sun Nov  7 16:50:32 2021
 
 [+] Scanning 1 hosts
 
@@ -189,6 +208,7 @@ Port:      3389
 
 [+] Summary of security issues
 
+
 rdp-sec-check v0.9-beta completed at Sun Nov  7 16:50:33 2021
 ```
 
@@ -197,7 +217,9 @@ Authentication and connection to such RDP servers can be made in several ways. F
 ### **Initiate an RDP Session**
 
 ```
-th1nyunb0y@htb[/htb]$ xfreerdp /u:cry0l1t3 /p:"P455w0rd!" /v:10.129.201.248[16:37:47:135] [95319:95320] [INFO][com.freerdp.core] - freerdp_connect:freerdp_set_last_error_ex resetting error state
+th1nyunb0y@htb[/htb]$ xfreerdp /u:cry0l1t3 /p:"P455w0rd!" /v:10.129.201.248
+
+[16:37:47:135] [95319:95320] [INFO][com.freerdp.core] - freerdp_connect:freerdp_set_last_error_ex resetting error state
 [16:37:47:135] [95319:95320] [INFO][com.freerdp.client.common.cmdline] - loading channelEx rdpdr
 [16:37:47:135] [95319:95320] [INFO][com.freerdp.client.common.cmdline] - loading channelEx rdpsnd
 [16:37:47:135] [95319:95320] [INFO][com.freerdp.client.common.cmdline] - loading channelEx cliprdr
@@ -212,7 +234,7 @@ th1nyunb0y@htb[/htb]$ xfreerdp /u:cry0l1t3 /p:"P455w0rd!" /v:10.129.201.248[16:3
 [16:37:47:600] [95319:95320] [ERROR][com.freerdp.crypto] - @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 [16:37:47:600] [95319:95320] [ERROR][com.freerdp.crypto] - @           WARNING: CERTIFICATE NAME MISMATCH!           @
 [16:37:47:600] [95319:95320] [ERROR][com.freerdp.crypto] - @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-[16:37:47:600] [95319:95320] [ERROR][com.freerdp.crypto] - The hostname used for this connection (10.129.201.248:3389)
+[16:37:47:600] [95319:95320] [ERROR][com.freerdp.crypto] - The hostname used for this connection (10.129.201.248:3389) 
 [16:37:47:600] [95319:95320] [ERROR][com.freerdp.crypto] - does not match the name given in the certificate:
 [16:37:47:600] [95319:95320] [ERROR][com.freerdp.crypto] - Common Name (CN):
 [16:37:47:600] [95319:95320] [ERROR][com.freerdp.crypto] -      ILF-SQL-01
@@ -225,6 +247,7 @@ Certificate details for 10.129.201.248:3389 (RDP-Server):
 The above X.509 certificate could not be verified, possibly because you do not have
 the CA certificate in your certificate store, or the certificate has expired.
 Please look at the OpenSSL documentation on how to add a private CA to the store.
+
 
 Do you trust the above certificate? (Y/T/N) y
 
@@ -256,7 +279,9 @@ As we already know, WinRM uses TCP ports `5985` (`HTTP`) and `5986` (`HTTPS`
 ### **Nmap WinRM**
 
 ```
-th1nyunb0y@htb[/htb]$ nmap -sV -sC 10.129.201.248 -p5985,5986 --disable-arp-ping -nStarting Nmap 7.92 ( https://nmap.org ) at 2021-11-06 16:31 CET
+th1nyunb0y@htb[/htb]$ nmap -sV -sC 10.129.201.248 -p5985,5986 --disable-arp-ping -n
+
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-11-06 16:31 CET
 Nmap scan report for 10.129.201.248
 Host is up (0.030s latency).
 
@@ -273,11 +298,15 @@ Nmap done: 1 IP address (1 host up) scanned in 7.34 seconds
 If we want to find out whether one or more remote servers can be reached via WinRM, we can easily do this with the help of PowerShell. The [Test-WsMan](https://docs.microsoft.com/en-us/powershell/module/microsoft.wsman.management/test-wsman?view=powershell-7.2) cmdlet is responsible for this, and the host's name in question is passed to it. In Linux-based environments, we can use the tool called [evil-winrm](https://github.com/Hackplayers/evil-winrm), another penetration testing tool designed to interact with WinRM.
 
 ```
-th1nyunb0y@htb[/htb]$ evil-winrm -i 10.129.201.248 -u Cry0l1t3 -p P455w0rD!Evil-WinRM shell v3.3
+th1nyunb0y@htb[/htb]$ evil-winrm -i 10.129.201.248 -u Cry0l1t3 -p P455w0rD!
+
+Evil-WinRM shell v3.3
 
 Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
 
-Data: For more information, check Evil-WinRM Github: https://github.com/Hackplayers/evil-winrm#Remote-path-completionInfo: Establishing connection to remote endpoint
+Data: For more information, check Evil-WinRM Github: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+
+Info: Establishing connection to remote endpoint
 
 *Evil-WinRM* PS C:\Users\Cry0l1t3\Documents>
 ```
@@ -299,7 +328,9 @@ The initialization of the WMI communication always takes place on `TCP` port 
 Windows Remote Management Protocols
 
 ```
-th1nyunb0y@htb[/htb]$ /usr/share/doc/python3-impacket/examples/wmiexec.py Cry0l1t3:"P455w0rD!"@10.129.201.248 "hostname"Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
+th1nyunb0y@htb[/htb]$ /usr/share/doc/python3-impacket/examples/wmiexec.py Cry0l1t3:"P455w0rD!"@10.129.201.248 "hostname"
+
+Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
 
 [*] SMBv3.0 dialect used
 ILF-SQL-01

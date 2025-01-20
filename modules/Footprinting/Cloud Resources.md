@@ -14,7 +14,8 @@ The use of cloud, such as [AWS](https://aws.amazon.com/), [GCP](https://cloud.
 ### **Company Hosted Servers**
 
 ```
-[!bash!]$ for i in $(cat subdomainlist);do host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f1,4;doneblog.inlanefreight.com 10.129.24.93
+[!bash!]$ for i in $(cat subdomainlist);do host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f1,4;done
+blog.inlanefreight.com 10.129.24.93
 inlanefreight.com 10.129.27.33
 matomo.inlanefreight.com 10.129.127.22
 www.inlanefreight.com 10.129.127.33

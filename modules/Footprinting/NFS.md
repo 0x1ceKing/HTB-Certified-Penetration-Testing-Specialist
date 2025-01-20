@@ -35,7 +35,10 @@ NFS is not difficult to configure because there are not as many options as FTP o
 ### **Exports File**
 
 ```
-th1nyunb0y@htb[/htb]$ cat /etc/exports# /etc/exports: the access control list for filesystems which may be exported#               to NFS clients.  See exports(5).#
+th1nyunb0y@htb[/htb]$ cat /etc/exports
+
+# /etc/exports: the access control list for filesystems which may be exported
+#               to NFS clients.  See exports(5).#
 # Example for NFSv2 and NFSv3:# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)#
 # Example for NFSv4:# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
 ```
@@ -58,7 +61,11 @@ Let us create such an entry for test purposes and play around with the settings.
 ### **ExportFS**
 
 ```
-root@nfs:~# echo '/mnt/nfs  10.129.14.0/24(sync,no_subtree_check)' >> /etc/exportsroot@nfs:~# systemctl restart nfs-kernel-server root@nfs:~# exportfs/mnt/nfs      	10.129.14.0/24
+root@nfs:~# echo '/mnt/nfs  10.129.14.0/24(sync,no_subtree_check)' >> /etc/exports
+root@nfs:~# systemctl restart nfs-kernel-server 
+root@nfs:~# exportfs
+
+/mnt/nfs      	10.129.14.0/24
 ```
 
 We have shared the folder `/mnt/nfs` to the subnet `10.129.14.0/24` with the setting shown above. This means that all hosts on the network will be able to mount this NFS share and inspect the contents of this folder.
@@ -89,7 +96,9 @@ When footprinting NFS, the TCP ports `111` and `2049` are essential. We can 
 ### **Nmap**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -p111,2049 -sV -sCStarting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 17:12 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -p111,2049 -sV -sC
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 17:12 CEST
 Nmap scan report for 10.129.14.128
 Host is up (0.00018s latency).
 
@@ -113,7 +122,9 @@ Nmap done: 1 IP address (1 host up) scanned in 6.58 seconds
 The `rpcinfo` NSE script retrieves a list of all currently running RPC services, their names and descriptions, and the ports they use. This lets us check whether the target share is connected to the network on all required ports. Also, for NFS, Nmap has some NSE scripts that can be used for the scans. These can then show us, for example, the `contents` of the share and its `stats`.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap --script nfs* 10.129.14.128 -sV -p111,2049Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 17:37 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap --script nfs* 10.129.14.128 -sV -p111,2049
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 17:37 CEST
 Nmap scan report for 10.129.14.128
 Host is up (0.00021s latency).
 
@@ -153,7 +164,9 @@ Once we have discovered such an NFS service, we can mount it on our local machin
 ### **Show Available NFS Shares**
 
 ```
-th1nyunb0y@htb[/htb]$ showmount -e 10.129.14.128Export list for 10.129.14.128:
+th1nyunb0y@htb[/htb]$ showmount -e 10.129.14.128
+
+Export list for 10.129.14.128:
 /mnt/nfs 10.129.14.0/24
 
 ```
@@ -161,7 +174,9 @@ th1nyunb0y@htb[/htb]$ showmount -e 10.129.14.128Export list for 10.129.14.128:
 ### **Mounting NFS Share**
 
 ```
-th1nyunb0y@htb[/htb]$ mkdir target-NFSth1nyunb0y@htb[/htb]$ sudo mount -t nfs 10.129.14.128:/ ./target-NFS/ -o nolockth1nyunb0y@htb[/htb]$ cd target-NFSth1nyunb0y@htb[/htb]$ tree ..
+th1nyunb0y@htb[/htb]$ mkdir target-NFS
+th1nyunb0y@htb[/htb]$ sudo mount -t nfs 10.129.14.128:/ ./target-NFS/ -o nolock
+th1nyunb0y@htb[/htb]$ cd target-NFSth1nyunb0y@htb[/htb]$ tree ..
 └── mnt
     └── nfs
         ├── id_rsa
@@ -206,5 +221,6 @@ After we have done all the necessary steps and obtained the information we need,
 ### **Unmounting**
 
 ```
-th1nyunb0y@htb[/htb]$ cd ..th1nyunb0y@htb[/htb]$ sudo umount ./target-NFS
+th1nyunb0y@htb[/htb]$ cd ..
+th1nyunb0y@htb[/htb]$ sudo umount ./target-NFS
 ```

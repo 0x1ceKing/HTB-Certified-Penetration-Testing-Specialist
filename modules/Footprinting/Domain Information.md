@@ -11,7 +11,8 @@
 ### **Certificate Transparency**
 
 ```
-th1nyunb0y@htb[/htb]$ curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq .[
+th1nyunb0y@htb[/htb]$ curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq .
+[
   {
     "issuer_ca_id": 23451835427,
     "issuer_name": "C=US, O=Let's Encrypt, CN=R3",
@@ -51,7 +52,9 @@ th1nyunb0y@htb[/htb]$ curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=jso
 If needed, we can also have them filtered by the unique subdomains.
 
 ```
-th1nyunb0y@htb[/htb]$ curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq . | grep name | cut -d":" -f2 | grep -v "CN=" | cut -d'"' -f2 | awk '{gsub(/\\n/,"\n");}1;' | sort -uaccount.ttn.inlanefreight.com
+th1nyunb0y@htb[/htb]$ curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq . | grep name | cut -d":" -f2 | grep -v "CN=" | cut -d'"' -f2 | awk '{gsub(/\\n/,"\n");}1;' | sort -u
+
+account.ttn.inlanefreight.com
 blog.inlanefreight.com
 bots.inlanefreight.com
 console.ttn.inlanefreight.com
@@ -80,7 +83,9 @@ Next, we can identify the hosts directly accessible from the Internet and not ho
 ### **Company Hosted Servers**
 
 ```
-th1nyunb0y@htb[/htb]$ for i in $(cat subdomainlist);do host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f1,4;doneblog.inlanefreight.com 10.129.24.93
+th1nyunb0y@htb[/htb]$ for i in $(cat subdomainlist);do host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f1,4;done
+
+blog.inlanefreight.com 10.129.24.93
 inlanefreight.com 10.129.27.33
 matomo.inlanefreight.com 10.129.127.22
 www.inlanefreight.com 10.129.127.33
@@ -94,7 +99,9 @@ Once we see which hosts can be investigated further, we can generate a list of I
 ### **Shodan - IP List**
 
 ```
-th1nyunb0y@htb[/htb]$ for i in $(cat subdomainlist);do host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f4 >> ip-addresses.txt;doneth1nyunb0y@htb[/htb]$ for i in $(cat ip-addresses.txt);do shodan host $i;done10.129.24.93
+th1nyunb0y@htb[/htb]$ for i in $(cat subdomainlist);do host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f4 >> ip-addresses.txt;done
+
+th1nyunb0y@htb[/htb]$ for i in $(cat ip-addresses.txt);do shodan host $i;done10.129.24.93
 City:                    Berlin
 Country:                 Germany
 Organization:            InlaneFreight
@@ -168,7 +175,8 @@ We remember the IP `10.129.127.22` (`matomo.inlanefreight.com`) for later acti
 ### **DNS Records**
 
 ```
-th1nyunb0y@htb[/htb]$ dig any inlanefreight.com; <<>> DiG 9.16.1-Ubuntu <<>> any inlanefreight.com
+th1nyunb0y@htb[/htb]$ dig any inlanefreight.com
+; <<>> DiG 9.16.1-Ubuntu <<>> any inlanefreight.com
 ;; global options: +cmd
 ;; Got answer:
 ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 52058

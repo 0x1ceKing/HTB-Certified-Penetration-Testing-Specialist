@@ -48,7 +48,10 @@ The management of SQL databases and their configurations is a vast topic. It is 
 ### **Default Configuration**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo apt install mysql-server -yth1nyunb0y@htb[/htb]$ cat /etc/mysql/mysql.conf.d/mysqld.cnf | grep -v "#" | sed -r '/^\s*$/d'[client]
+th1nyunb0y@htb[/htb]$ sudo apt install mysql-server -y
+th1nyunb0y@htb[/htb]$ cat /etc/mysql/mysql.conf.d/mysqld.cnf | grep -v "#" | sed -r '/^\s*$/d'
+
+[client]
 port		= 3306
 socket		= /var/run/mysqld/mysqld.sock
 
@@ -104,7 +107,9 @@ There are many reasons why a MySQL server could be accessed from an external net
 ### **Scanning MySQL Server**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -sV -sC -p3306 --script mysql*Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-21 00:53 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -sV -sC -p3306 --script mysql*
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-21 00:53 CEST
 Nmap scan report for 10.129.14.128
 Host is up (0.00021s latency).
 
@@ -154,13 +159,17 @@ As with all our scans, we must be careful with the results and manually confirm 
 ### **Interaction with the MySQL Server**
 
 ```
-th1nyunb0y@htb[/htb]$ mysql -u root -h 10.129.14.132ERROR 1045 (28000): Access denied for user 'root'@'10.129.14.1' (using password: NO)
+th1nyunb0y@htb[/htb]$ mysql -u root -h 10.129.14.132
+
+ERROR 1045 (28000): Access denied for user 'root'@'10.129.14.1' (using password: NO)
 ```
 
 For example, if we use a password that we have guessed or found through our research, we will be able to log in to the MySQL server and execute some commands.
 
 ```
-th1nyunb0y@htb[/htb]$ mysql -u root -pP4SSw0rd -h 10.129.14.128Welcome to the MariaDB monitor.  Commands end with ; or \g.
+th1nyunb0y@htb[/htb]$ mysql -u root -pP4SSw0rd -h 10.129.14.128
+
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MySQL connection id is 150165
 Server version: 8.0.27-0ubuntu0.20.04.1 (Ubuntu)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.

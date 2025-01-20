@@ -26,7 +26,9 @@ Many other clients can be used to access a database running on MSSQL. Including 
 Of the MSSQL clients listed above, pentesters may find Impacket's mssqlclient.py to be the most useful due to SecureAuthCorp's Impacket project being present on many pentesting distributions at install. To find if and where the client is located on our host, we can use the following command:
 
 ```
-th1nyunb0y@htb[/htb]$ locate mssqlclient/usr/bin/impacket-mssqlclient
+th1nyunb0y@htb[/htb]$ locate mssqlclient
+
+/usr/bin/impacket-mssqlclient
 /usr/share/doc/python3-impacket/examples/mssqlclient.py
 
 ```
@@ -79,7 +81,9 @@ The scripted NMAP scan below provides us with helpful information. We can see th
 ### **NMAP MSSQL Script Scan**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p 1433 10.129.201.248Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-08 09:40 EST
+th1nyunb0y@htb[/htb]$ sudo nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p 1433 10.129.201.248
+
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-08 09:40 EST
 Nmap scan report for 10.129.201.248
 Host is up (0.15s latency).
 

@@ -57,7 +57,9 @@ The [sshd_config](https://www.ssh.com/academy/ssh/sshd_config) file, responsib
 ### **Default Configuration**
 
 ```
-th1nyunb0y@htb[/htb]$ cat /etc/ssh/sshd_config  | grep -v "#" | sed -r '/^\s*$/d'Include /etc/ssh/sshd_config.d/*.conf
+th1nyunb0y@htb[/htb]$ cat /etc/ssh/sshd_config  | grep -v "#" | sed -r '/^\s*$/d'
+
+Include /etc/ssh/sshd_config.d/*.conf
 ChallengeResponseAuthentication no
 UsePAM yes
 X11Forwarding yes
@@ -96,7 +98,10 @@ One of the tools we can use to fingerprint the SSH server is [ssh-audit](https:
 ### **SSH-Audit**
 
 ```
-th1nyunb0y@htb[/htb]$ git clone https://github.com/jtesta/ssh-audit.git && cd ssh-auditth1nyunb0y@htb[/htb]$ ./ssh-audit.py 10.129.14.132# general(gen) banner: SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.3
+th1nyunb0y@htb[/htb]$ git clone https://github.com/jtesta/ssh-audit.git && cd ssh-audit
+th1nyunb0y@htb[/htb]$ ./ssh-audit.py 10.129.14.132
+
+# general(gen) banner: SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.3
 (gen) software: OpenSSH 8.2p1
 (gen) compatibility: OpenSSH 7.4+, Dropbear SSH 2018.76+
 (gen) compression: enabled (zlib@openssh.com)
@@ -131,7 +136,9 @@ The first thing we can see in the first few lines of the output is the banner th
 ### **Change Authentication Method**
 
 ```
-th1nyunb0y@htb[/htb]$ ssh -v cry0l1t3@10.129.14.132OpenSSH_8.2p1 Ubuntu-4ubuntu0.3, OpenSSL 1.1.1f  31 Mar 2020
+th1nyunb0y@htb[/htb]$ ssh -v cry0l1t3@10.129.14.132
+
+OpenSSH_8.2p1 Ubuntu-4ubuntu0.3, OpenSSL 1.1.1f  31 Mar 2020
 debug1: Reading configuration data /etc/ssh/ssh_config
 ...SNIP...
 debug1: Authentications that can continue: publickey,password,keyboard-interactive
@@ -140,7 +147,9 @@ debug1: Authentications that can continue: publickey,password,keyboard-interacti
 For potential brute-force attacks, we can specify the authentication method with the SSH client option `PreferredAuthentications`.
 
 ```
-th1nyunb0y@htb[/htb]$ ssh -v cry0l1t3@10.129.14.132 -o PreferredAuthentications=passwordOpenSSH_8.2p1 Ubuntu-4ubuntu0.3, OpenSSL 1.1.1f  31 Mar 2020
+th1nyunb0y@htb[/htb]$ ssh -v cry0l1t3@10.129.14.132 -o PreferredAuthentications=password
+
+OpenSSH_8.2p1 Ubuntu-4ubuntu0.3, OpenSSL 1.1.1f  31 Mar 2020
 debug1: Reading configuration data /etc/ssh/ssh_config
 ...SNIP...
 debug1: Authentications that can continue: publickey,password,keyboard-interactive
@@ -166,7 +175,9 @@ Let's do a bit of quick footprinting. We can see that Rsync is in use using prot
 ### **Scanning for Rsync**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap -sV -p 873 127.0.0.1Starting Nmap 7.92 ( https://nmap.org ) at 2022-09-19 09:31 EDT
+th1nyunb0y@htb[/htb]$ sudo nmap -sV -p 873 127.0.0.1
+
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-09-19 09:31 EDT
 Nmap scan report for localhost (127.0.0.1)
 Host is up (0.0058s latency).
 
@@ -182,7 +193,9 @@ Nmap done: 1 IP address (1 host up) scanned in 1.13 seconds
 We can next probe the service a bit to see what we can gain access to.
 
 ```
-th1nyunb0y@htb[/htb]$ nc -nv 127.0.0.1 873(UNKNOWN) [127.0.0.1] 873 (rsync) open
+th1nyunb0y@htb[/htb]$ nc -nv 127.0.0.1 873
+
+(UNKNOWN) [127.0.0.1] 873 (rsync) open
 @RSYNCD: 31.0
 @RSYNCD: 31.0
 #listdev            	Dev Tools
@@ -194,7 +207,9 @@ th1nyunb0y@htb[/htb]$ nc -nv 127.0.0.1 873(UNKNOWN) [127.0.0.1] 873 (rsync) open
 Here we can see a share called `dev`, and we can enumerate it further.
 
 ```
-th1nyunb0y@htb[/htb]$ rsync -av --list-only rsync://127.0.0.1/devreceiving incremental file list
+th1nyunb0y@htb[/htb]$ rsync -av --list-only rsync://127.0.0.1/dev
+
+receiving incremental file list
 drwxr-xr-x             48 2022/09/19 09:43:10 .
 -rw-r--r--              0 2022/09/19 09:34:50 build.sh
 -rw-r--r--              0 2022/09/19 09:36:02 secrets.yaml
@@ -240,7 +255,9 @@ The /etc/hosts.equiv file contains a list of trusted hosts and is used to grant 
 Linux Remote Management Protocols
 
 ```
-th1nyunb0y@htb[/htb]$ cat /etc/hosts.equiv# <hostname> <local username>
+th1nyunb0y@htb[/htb]$ cat /etc/hosts.equiv
+
+# <hostname> <local username>
 pwnbox cry0l1t3
 ```
 
@@ -251,7 +268,9 @@ Now that we have a basic understanding of `r-commands`, let's do some quick foo
 Linux Remote Management Protocols
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap -sV -p 512,513,514 10.0.17.2Starting Nmap 7.80 ( https://nmap.org ) at 2022-12-02 15:02 EST
+th1nyunb0y@htb[/htb]$ sudo nmap -sV -p 512,513,514 10.0.17.2
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2022-12-02 15:02 EST
 Nmap scan report for 10.0.17.2
 Host is up (0.11s latency).
 
@@ -275,7 +294,9 @@ The primary concern for `r-services`, and one of the primary reasons `SSH` wa
 Linux Remote Management Protocols
 
 ```
-th1nyunb0y@htb[/htb]$ cat .rhostshtb-student     10.0.17.5
+th1nyunb0y@htb[/htb]$ cat .rhosts
+
+htb-student     10.0.17.5
 +               10.0.17.10
 +               +
 ```
@@ -289,7 +310,9 @@ Misconfigurations in either of these files can allow an attacker to authenticate
 Linux Remote Management Protocols
 
 ```
-th1nyunb0y@htb[/htb]$ rlogin 10.0.17.2 -l htb-studentLast login: Fri Dec  2 16:11:21 from localhost
+th1nyunb0y@htb[/htb]$ rlogin 10.0.17.2 -l htb-student
+
+Last login: Fri Dec  2 16:11:21 from localhost
 
 [htb-student@localhost ~]$
 ```
@@ -301,7 +324,9 @@ We have successfully logged in under the `htb-student` account on the remote h
 Linux Remote Management Protocols
 
 ```
-th1nyunb0y@htb[/htb]$ rwhoroot     web01:pts/0 Dec  2 21:34
+th1nyunb0y@htb[/htb]$ rwho
+
+root     web01:pts/0 Dec  2 21:34
 htb-student     workstn01:tty1  Dec  2 19:57  2:25
 ```
 
@@ -314,7 +339,9 @@ To provide additional information in conjunction with `rwho`, we can issue the�
 Linux Remote Management Protocols
 
 ```
-th1nyunb0y@htb[/htb]$ rusers -al 10.0.17.5htb-student     10.0.17.5:console          Dec 2 19:57     2:25
+th1nyunb0y@htb[/htb]$ rusers -al 10.0.17.5
+
+htb-student     10.0.17.5:console          Dec 2 19:57     2:25
 ```
 
 As we can see, R-services are less frequently used nowadays due to their inherent security flaws and the availability of more secure protocols such as SSH. To be a well-rounded information security professional, we must have a broad and deep understanding of many systems, applications, protocols, etc. So, file away this knowledge about R-services because you never know when you may encounter them.

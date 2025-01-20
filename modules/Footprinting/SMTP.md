@@ -3,7 +3,6 @@
   - [**Default Configuration**](#default-configuration)
     - [**Default Configuration**](#default-configuration-1)
     - [**Telnet - HELO/EHLO**](#telnet---heloehlo)
-    - [**Telnet - VRFY**](#telnet---vrfy)
     - [**Send an Email**](#send-an-email)
   - [**Dangerous Settings**](#dangerous-settings)
     - [**Open Relay Configuration**](#open-relay-configuration)
@@ -40,23 +39,27 @@ Each SMTP server can be configured in many ways, as can all other services. Howe
 ### **Default Configuration**
 
 ```
-th1nyunb0y@htb[/htb]$ cat /etc/postfix/main.cf | grep -v "#" | sed -r "/^\s*$/d"smtpd_banner = ESMTP Server
+th1nyunb0y@htb[/htb]$ cat /etc/postfix/main.cf | grep -v "#" | sed -r "/^\s*$/d"
+
+smtpd_banner = ESMTP Server 
 biff = no
 append_dot_mydomain = no
 readme_directory = no
 compatibility_level = 2
-smtp_tls_session_cache_database = btree:${data_directory}/smtp_scachemyhostname = mail1.inlanefreight.htb
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+myhostname = mail1.inlanefreight.htb
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 smtp_generic_maps = hash:/etc/postfix/generic
-mydestination =$myhostname, localhost masquerade_domains =$myhostnamemynetworks = 127.0.0.0/8 10.129.0.0/16
+mydestination = $myhostname, localhost 
+masquerade_domains = $myhostname
+mynetworks = 127.0.0.0/8 10.129.0.0/16
 mailbox_size_limit = 0
 recipient_delimiter = +
 smtp_bind_address = 0.0.0.0
 inet_protocols = ipv4
 smtpd_helo_restrictions = reject_invalid_hostname
 home_mailbox = /home/postfix
-
 ```
 
 The sending and communication are also done by special commands that cause the SMTP server to do what the user requires.
@@ -79,14 +82,18 @@ To interact with the SMTP server, we can use the `telnet` tool to initialize a
 ### **Telnet - HELO/EHLO**
 
 ```
-th1nyunb0y@htb[/htb]$ telnet 10.129.14.128 25Trying 10.129.14.128...
+th1nyunb0y@htb[/htb]$ telnet 10.129.14.128 25
+
+Trying 10.129.14.128...
 Connected to 10.129.14.128.
 Escape character is '^]'.
-220 ESMTP Server
+220 ESMTP Server 
+
 
 HELO mail1.inlanefreight.htb
 
 250 mail1.inlanefreight.htb
+
 
 EHLO mail1
 
@@ -101,33 +108,6 @@ EHLO mail1
 250 CHUNKING
 ```
 
-The command `VRFY` can be used to enumerate existing users on the system. However, this does not always work. Depending on how the SMTP server is configured, the SMTP server may issue `code 252` and confirm the existence of a user that does not exist on the system. A list of all SMTP response codes can be found [here](https://serversmtp.com/smtp-error/).
-
-### **Telnet - VRFY**
-
-```
-th1nyunb0y@htb[/htb]$ telnet 10.129.14.128 25Trying 10.129.14.128...
-Connected to 10.129.14.128.
-Escape character is '^]'.
-220 ESMTP Server
-
-VRFY root
-
-252 2.0.0 root
-
-VRFY cry0l1t3
-
-252 2.0.0 cry0l1t3
-
-VRFY testuser
-
-252 2.0.0 testuser
-
-VRFY aaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-252 2.0.0 aaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-
 Therefore, one should never entirely rely on the results of automatic tools. After all, they execute pre-configured commands, but none of the functions explicitly state how the administrator configures the tested server.
 
 Sometimes we may have to work through a web proxy. We can also make this web proxy connect to the SMTP server. The command that we would send would then look something like this: `CONNECT 10.129.14.128:25 HTTP/1.0`
@@ -137,7 +117,9 @@ All the commands we enter in the command line to send an email we know from ever
 ### **Send an Email**
 
 ```
-th1nyunb0y@htb[/htb]$ telnet 10.129.14.128 25Trying 10.129.14.128...
+th1nyunb0y@htb[/htb]$ telnet 10.129.14.128 25
+
+Trying 10.129.14.128...
 Connected to 10.129.14.128.
 Escape character is '^]'.
 220 ESMTP Server
@@ -211,7 +193,9 @@ The default Nmap scripts include `smtp-commands`, which uses the `EHLO` comma
 ### **Nmap**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -sC -sV -p25Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-27 17:56 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -sC -sV -p25
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-27 17:56 CEST
 Nmap scan report for 10.129.14.128
 Host is up (0.00025s latency).
 
@@ -230,7 +214,9 @@ However, we can also use the [smtp-open-relay](https://nmap.org/nsedoc/scripts/
 ### **Nmap - Open Relay**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -p25 --script smtp-open-relay -vStarting Nmap 7.80 ( https://nmap.org ) at 2021-09-30 02:29 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -p25 --script smtp-open-relay -v
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-30 02:29 CEST
 NSE: Loaded 1 scripts for scanning.
 NSE: Script Pre-scanning.
 Initiating NSE at 02:29

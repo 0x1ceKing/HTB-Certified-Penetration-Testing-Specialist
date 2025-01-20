@@ -119,7 +119,8 @@ As soon as we connect to the vsFTPd server, the `response code 220` is display
 ### **Anonymous Login**
 
 ```
-th1nyunb0y@htb[/htb]$ ftp 10.129.14.136Connected to 10.129.14.136.
+th1nyunb0y@htb[/htb]$ ftp 10.129.14.136
+Connected to 10.129.14.136.
 220 "Welcome to the HTB Academy vsFTP service."
 Name (10.129.14.136:cry0l1t3): anonymous
 
@@ -309,7 +310,8 @@ We also can download all the files and folders we have access to at once. This i
 ### **Download All Available Files**
 
 ```
-th1nyunb0y@htb[/htb]$ wget -m --no-passive ftp://anonymous:anonymous@10.129.14.136--2021-09-19 14:45:58--  ftp://anonymous:*password*@10.129.14.136/
+th1nyunb0y@htb[/htb]$ wget -m --no-passive ftp://anonymous:anonymous@10.129.14.136
+--2021-09-19 14:45:58--  ftp://anonymous:*password*@10.129.14.136/
            => ‘10.129.14.136/.listing’
 Connecting to 10.129.14.136:21... connected.
 Logging in as anonymous ... Logged in!
@@ -405,7 +407,8 @@ Footprinting using various network scanners is also a handy and widespread appro
 ### **Nmap FTP Scripts**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap --script-updatedbStarting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 13:49 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap --script-updatedb
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 13:49 CEST
 NSE: Updating rule database.
 NSE: Script Database updated successfully.
 Nmap done: 0 IP addresses (0 hosts up) scanned in 0.28 seconds
@@ -414,7 +417,9 @@ Nmap done: 0 IP addresses (0 hosts up) scanned in 0.28 seconds
 All the NSE scripts are located on the Pwnbox in `/usr/share/nmap/scripts/`, but on our systems, we can find them using a simple command on our system.
 
 ```
-th1nyunb0y@htb[/htb]$ find / -type f -name ftp*2>/dev/null | grep scripts/usr/share/nmap/scripts/ftp-syst.nse
+th1nyunb0y@htb[/htb]$ find / -type f -name ftp*2>/dev/null | grep scripts
+
+/usr/share/nmap/scripts/ftp-syst.nse
 /usr/share/nmap/scripts/ftp-vsftpd-backdoor.nse
 /usr/share/nmap/scripts/ftp-vuln-cve2010-4221.nse
 /usr/share/nmap/scripts/ftp-proftpd-backdoor.nse
@@ -429,7 +434,9 @@ As we already know, the FTP server usually runs on the standard TCP port 21, whi
 ### **Nmap**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap -sV -p21 -sC -A 10.129.14.136Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-16 18:12 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap -sV -p21 -sC -A 10.129.14.136
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-16 18:12 CEST
 Nmap scan report for 10.129.14.136
 Host is up (0.00013s latency).
 
@@ -464,7 +471,9 @@ The `ftp-syst`, for example, executes the `STAT` command, which displays info
 ### **Nmap Script Trace**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap -sV -p21 -sC -A 10.129.14.136 --script-traceStarting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 13:54 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap -sV -p21 -sC -A 10.129.14.136 --script-trace
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 13:54 CEST
 NSOCK INFO [11.4640s] nsock_trace_handler_callback(): Callback: CONNECT SUCCESS for EID 8 [10.129.14.136:21]
 NSOCK INFO [11.4640s] nsock_trace_handler_callback(): Callback: CONNECT SUCCESS for EID 16 [10.129.14.136:21]
 NSOCK INFO [11.4640s] nsock_trace_handler_callback(): Callback: CONNECT SUCCESS for EID 24 [10.129.14.136:21]
@@ -493,7 +502,9 @@ th1nyunb0y@htb[/htb]$ telnet 10.129.14.136 21
 It looks slightly different if the FTP server runs with TLS/SSL encryption. Because then we need a client that can handle TLS/SSL. For this, we can use the client `openssl` and communicate with the FTP server. The good thing about using `openssl` is that we can see the SSL certificate, which can also be helpful.
 
 ```
-th1nyunb0y@htb[/htb]$ openssl s_client -connect 10.129.14.136:21 -starttls ftpCONNECTED(00000003)
+th1nyunb0y@htb[/htb]$ openssl s_client -connect 10.129.14.136:21 -starttls ftp
+
+CONNECTED(00000003)
 Can't use SSL_get_servername
 depth=0 C = US, ST = California, L = Sacramento, O = Inlanefreight, OU = Dev, CN = master.inlanefreight.htb, emailAddress = admin@inlanefreight.htb
 verify error:num=18:self signed certificate

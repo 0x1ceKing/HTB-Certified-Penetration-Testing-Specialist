@@ -165,41 +165,49 @@ Now we can display a list (`-L`) of the server's shares with the `smbclient` c
 ### **SMBclient - Connecting to the Share**
 
 ```
-th1nyunb0y@htb[/htb]$ smbclient -N -L //10.129.14.128        Sharename       Type      Comment
+th1nyunb0y@htb[/htb]$ smbclient -N -L //10.129.14.128
+
+        Sharename       Type      Comment
         ---------       ----      -------
-        print$          Disk      Printer Drivers        home            Disk      INFREIGHT Samba
+        print$          Disk      Printer Drivers
+        home            Disk      INFREIGHT Samba
         dev             Disk      DEVenv
         notes           Disk      CheckIT
-        IPC$            IPC       IPC Service (DEVSM)SMB1 disabled -- no workgroup available
+        IPC$            IPC       IPC Service (DEVSM)
+SMB1 disabled -- no workgroup available
 ```
 
 We can see that we now have five different shares on the Samba server from the result. Thereby `print$` and an `IPC$` are already included by default in the basic setting, as we have already seen. Since we deal with the `[notes]` share, let us log in and inspect it using the same client program. If we are not familiar with the client program, we can use the `help` command on successful login, listing all the possible commands we can execute.
 
 ```
-th1nyunb0y@htb[/htb]$ smbclient //10.129.14.128/notesEnter WORKGROUP\<username>'s password:
+th1nyunb0y@htb[/htb]$ smbclient //10.129.14.128/notes
+
+Enter WORKGROUP\<username>'s password: 
 Anonymous login successful
 Try "help" to get a list of possible commands.
 
+
 smb: \> help
 
-?              allinfo        altname        archive        backup
-blocksize      cancel         case_sensitive cd             chmod
-chown          close          del            deltree        dir
-du             echo           exit           get            getfacl
-geteas         hardlink       help           history        iosize
-lcd            link           lock           lowercase      ls
-l              mask           md             mget           mkdir
-more           mput           newer          notify         open
-posix          posix_encrypt  posix_open     posix_mkdir    posix_rmdir
-posix_unlink   posix_whoami   print          prompt         put
-pwd            q              queue          quit           readlink
-rd             recurse        reget          rename         reput
-rm             rmdir          showacls       setea          setmode
-scopy          stat           symlink        tar            tarmode
-timeout        translate      unlock         volume         vuid
-wdel           logon          listconnect    showconnect    tcon
-tdis           tid            utimes         logoff         ..
-!
+?              allinfo        altname        archive        backup         
+blocksize      cancel         case_sensitive cd             chmod          
+chown          close          del            deltree        dir            
+du             echo           exit           get            getfacl        
+geteas         hardlink       help           history        iosize         
+lcd            link           lock           lowercase      ls             
+l              mask           md             mget           mkdir          
+more           mput           newer          notify         open           
+posix          posix_encrypt  posix_open     posix_mkdir    posix_rmdir    
+posix_unlink   posix_whoami   print          prompt         put            
+pwd            q              queue          quit           readlink       
+rd             recurse        reget          rename         reput          
+rm             rmdir          showacls       setea          setmode        
+scopy          stat           symlink        tar            tarmode        
+timeout        translate      unlock         volume         vuid           
+wdel           logon          listconnect    showconnect    tcon           
+tdis           tid            utimes         logoff         ..             
+!            
+
 
 smb: \> ls
 
@@ -217,20 +225,22 @@ Once we have discovered interesting files or folders, we can download them using
 SMB
 
 ```
-smb: \> get prep-prod.txt
+smb: \> get prep-prod.txt 
 
-getting file \prep-prod.txt of size 71 as prep-prod.txt (8,7 KiloBytes/sec)
+getting file \prep-prod.txt of size 71 as prep-prod.txt (8,7 KiloBytes/sec) 
 (average 8,7 KiloBytes/sec)
+
 
 smb: \> !ls
 
 prep-prod.txt
 
+
 smb: \> !cat prep-prod.txt
 
 [] check your code with the templates
 [] run code-assessment.py
-[] …
+[] …	
 ```
 
 From the administrative point of view, we can check these connections using `smbstatus`. Apart from the Samba version, we can also see who, from which host, and which share the client is connected. This is especially important once we have entered a subnet (perhaps even an isolated one) that the others can still access.
@@ -242,14 +252,16 @@ For example, with domain-level security, the samba server acts as a member of a 
 SMB
 
 ```
-root@samba:~# smbstatusSamba version 4.11.6-Ubuntu
-PID     Username     Group        Machine                                   Protocol Version  Encryption           Signing
-----------------------------------------------------------------------------------------------------------------------------------------
-75691   sambauser    samba        10.10.14.4 (ipv4:10.10.14.4:45564)      SMB3_11           -                    -
+root@samba:~# smbstatus
 
-Service      pid     Machine       Connected at                     Encryption   Signing
+Samba version 4.11.6-Ubuntu
+PID     Username     Group        Machine                                   Protocol Version  Encryption           Signing              
+----------------------------------------------------------------------------------------------------------------------------------------
+75691   sambauser    samba        10.10.14.4 (ipv4:10.10.14.4:45564)      SMB3_11           -                    -                    
+
+Service      pid     Machine       Connected at                     Encryption   Signing     
 ---------------------------------------------------------------------------------------------
-notes        75691   10.10.14.4   Do Sep 23 00:12:06 2021 CEST     -            -
+notes        75691   10.10.14.4   Do Sep 23 00:12:06 2021 CEST     -            -           
 
 No locked files
 ```
@@ -263,7 +275,9 @@ Let us go back to one of our enumeration tools. Nmap also has many options and N
 ### **Nmap**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -sV -sC -p139,445Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 15:15 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.14.128 -sV -sC -p139,445
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 15:15 CEST
 Nmap scan report for sharing.inlanefreight.htb (10.129.14.128)
 Host is up (0.00024s latency).
 
@@ -274,10 +288,10 @@ MAC Address: 00:00:00:00:00:00 (VMware)
 
 Host script results:
 |_nbstat: NetBIOS name: HTB, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
-| smb2-security-mode:
-|   2.02:
+| smb2-security-mode: 
+|   2.02: 
 |_    Message signing enabled but not required
-| smb2-time:
+| smb2-time: 
 |   date: 2021-09-19T13:16:04
 |_  start_date: N/A
 
@@ -292,8 +306,10 @@ The [Remote Procedure Call](https://www.geeksforgeeks.org/remote-procedure-call
 ### **RPCclient**
 
 ```
-th1nyunb0y@htb[/htb]$ rpcclient -U "" 10.129.14.128Enter WORKGROUP\'s password:
-rpcclient$>
+th1nyunb0y@htb[/htb]$ rpcclient -U "" 10.129.14.128
+
+Enter WORKGROUP\'s password:
+rpcclient $> 
 ```
 
 The `rpcclient` offers us many different requests with which we can execute specific functions on the SMB server to get information. A complete list of all these functions can be found on the [man page](https://www.samba.org/samba/docs/current/man-html/rpcclient.1.html) of the rpcclient.
@@ -311,15 +327,23 @@ The `rpcclient` offers us many different requests with which we can execute sp
 ### **RPCclient - Enumeration**
 
 ```
-rpcclient$> srvinfo        DEVSMB         Wk Sv PrQ Unx NT SNT DEVSM
+rpcclient $> srvinfo
+
+        DEVSMB         Wk Sv PrQ Unx NT SNT DEVSM
         platform_id     :       500
         os version      :       6.1
         server type     :       0x809a03
+		
+		
+rpcclient $> enumdomains
 
-rpcclient$> enumdomainsname:[DEVSMB] idx:[0x0]
+name:[DEVSMB] idx:[0x0]
 name:[Builtin] idx:[0x1]
 
-rpcclient$> querydominfoDomain:         DEVOPS
+
+rpcclient $> querydominfo
+
+Domain:         DEVOPS
 Server:         DEVSMB
 Comment:        DEVSM
 Total Users:    2
@@ -331,7 +355,10 @@ Domain Server State:    0x1
 Server Role:    ROLE_DOMAIN_PDC
 Unknown 3:      0x1
 
-rpcclient$> netshareenumallnetname: print$
+
+rpcclient $> netshareenumall
+
+netname: print$
         remark: Printer Drivers
         path:   C:\var\lib\samba\printers
         password:
@@ -351,8 +378,11 @@ netname: IPC$
         remark: IPC Service (DEVSM)
         path:   C:\tmp
         password:
+		
+		
+rpcclient $> netsharegetinfo notes
 
-rpcclient$> netsharegetinfo notesnetname: notes
+netname: notes
         remark: CheckIT
         path:   C:\mnt\notes\
         password:
@@ -361,14 +391,14 @@ rpcclient$> netsharegetinfo notesnetname: notes
         max_uses:       -1
         num_uses:       1
 revision: 1
-type: 0x8004: SEC_DESC_DACL_PRESENT SEC_DESC_SELF_RELATIVE
+type: 0x8004: SEC_DESC_DACL_PRESENT SEC_DESC_SELF_RELATIVE 
 DACL
         ACL     Num ACEs:       1       revision:       2
         ---
         ACE
-                type: ACCESS ALLOWED (0) flags: 0x00
+                type: ACCESS ALLOWED (0) flags: 0x00 
                 Specific bits: 0x1ff
-                Permissions: 0x101f01ff: Generic all access SYNCHRONIZE_ACCESS WRITE_OWNER_ACCESS WRITE_DAC_ACCESS READ_CONTROL_ACCESS DELETE_ACCESS
+                Permissions: 0x101f01ff: Generic all access SYNCHRONIZE_ACCESS WRITE_OWNER_ACCESS WRITE_DAC_ACCESS READ_CONTROL_ACCESS DELETE_ACCESS 
                 SID: S-1-1-0
 ```
 
@@ -379,10 +409,15 @@ Most importantly, anonymous access to such services can also lead to the discove
 ### **Rpcclient - User Enumeration**
 
 ```
-rpcclient$> enumdomusersuser:[mrb3n] rid:[0x3e8]
+rpcclient $> enumdomusers
+
+user:[mrb3n] rid:[0x3e8]
 user:[cry0l1t3] rid:[0x3e9]
 
-rpcclient$> queryuser 0x3e9        User Name   :   cry0l1t3
+
+rpcclient $> queryuser 0x3e9
+
+        User Name   :   cry0l1t3
         Full Name   :   cry0l1t3
         Home Drive  :   \\devsmb\cry0l1t3
         Dir Drive   :
@@ -409,7 +444,10 @@ rpcclient$> queryuser 0x3e9        User Name   :   cry0l1t3
         padding1[0..7]...
         logon_hrs[0..21]...
 
-rpcclient$> queryuser 0x3e8        User Name   :   mrb3n
+
+rpcclient $> queryuser 0x3e8
+
+        User Name   :   mrb3n
         Full Name   :
         Home Drive  :   \\devsmb\mrb3n
         Dir Drive   :
@@ -442,7 +480,9 @@ We can then use the results to identify the group's RID, which we can then use t
 ### **Rpcclient - Group Information**
 
 ```
-rpcclient$> querygroup 0x201        Group Name:     None
+rpcclient $> querygroup 0x201
+
+        Group Name:     None
         Description:    Ordinary Users
         Group Attribute:7
         Num Members:2
@@ -453,14 +493,16 @@ However, it can also happen that not all commands are available to us, and we ha
 ### **Brute Forcing User RIDs**
 
 ```
-th1nyunb0y@htb[/htb]$ for i in $(seq 500 1100);do rpcclient -N -U "" 10.129.14.128 -c "queryuser 0x$(printf '%x\n' $i)" | grep "User Name\|user_rid\|group_rid" && echo "";done        User Name   :   sambauser
+th1nyunb0y@htb[/htb]$ for i in $(seq 500 1100);do rpcclient -N -U "" 10.129.14.128 -c "queryuser 0x$(printf '%x\n' $i)" | grep "User Name\|user_rid\|group_rid" && echo "";done
+
+        User Name   :   sambauser
         user_rid :      0x1f5
         group_rid:      0x201
-
+		
         User Name   :   mrb3n
         user_rid :      0x3e8
         group_rid:      0x201
-
+		
         User Name   :   cry0l1t3
         user_rid :      0x3e9
         group_rid:      0x201
@@ -471,7 +513,9 @@ An alternative to this would be a Python script from [Impacket](https://github.
 ### **Impacket - Samrdump.py**
 
 ```
-th1nyunb0y@htb[/htb]$ samrdump.py 10.129.14.128Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
+th1nyunb0y@htb[/htb]$ samrdump.py 10.129.14.128
+
+Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
 
 [*] Retrieving endpoint list from 10.129.14.128
 Found domain(s):
@@ -480,24 +524,24 @@ Found domain(s):
 [*] Looking up users in domain DEVSMB
 Found user: mrb3n, uid = 1000
 Found user: cry0l1t3, uid = 1001
-mrb3n (1000)/FullName:
-mrb3n (1000)/UserComment:
+mrb3n (1000)/FullName: 
+mrb3n (1000)/UserComment: 
 mrb3n (1000)/PrimaryGroupId: 513
 mrb3n (1000)/BadPasswordCount: 0
 mrb3n (1000)/LogonCount: 0
 mrb3n (1000)/PasswordLastSet: 2021-09-22 17:47:59
 mrb3n (1000)/PasswordDoesNotExpire: False
 mrb3n (1000)/AccountIsDisabled: False
-mrb3n (1000)/ScriptPath:
+mrb3n (1000)/ScriptPath: 
 cry0l1t3 (1001)/FullName: cry0l1t3
-cry0l1t3 (1001)/UserComment:
+cry0l1t3 (1001)/UserComment: 
 cry0l1t3 (1001)/PrimaryGroupId: 513
 cry0l1t3 (1001)/BadPasswordCount: 0
 cry0l1t3 (1001)/LogonCount: 0
 cry0l1t3 (1001)/PasswordLastSet: 2021-09-22 17:50:56
 cry0l1t3 (1001)/PasswordDoesNotExpire: False
 cry0l1t3 (1001)/AccountIsDisabled: False
-cry0l1t3 (1001)/ScriptPath:
+cry0l1t3 (1001)/ScriptPath: 
 [*] Received 2 entries.
 ```
 
@@ -506,7 +550,9 @@ The information we have already obtained with `rpcclient` can also be obtained
 ### **SMBmap**
 
 ```
-th1nyunb0y@htb[/htb]$ smbmap -H 10.129.14.128[+] Finding open SMB ports....
+th1nyunb0y@htb[/htb]$ smbmap -H 10.129.14.128
+
+[+] Finding open SMB ports....
 [+] User SMB session established on 10.129.14.128...
 [+] IP: 10.129.14.128:445       Name: 10.129.14.128
         Disk                                                    Permissions     Comment
@@ -520,12 +566,15 @@ th1nyunb0y@htb[/htb]$ smbmap -H 10.129.14.128[+] Finding open SMB ports....
 ### **CrackMapExec**
 
 ```
-th1nyunb0y@htb[/htb]$ crackmapexec smb 10.129.14.128 --shares -u '' -p ''SMB         10.129.14.128   445    DEVSMB           [*] Windows 6.1 Build 0 (name:DEVSMB) (domain:) (signing:False) (SMBv1:False)
-SMB         10.129.14.128   445    DEVSMB           [+] \:
+th1nyunb0y@htb[/htb]$ crackmapexec smb 10.129.14.128 --shares -u '' -p ''
+
+SMB         10.129.14.128   445    DEVSMB           [*] Windows 6.1 Build 0 (name:DEVSMB) (domain:) (signing:False) (SMBv1:False)
+SMB         10.129.14.128   445    DEVSMB           [+] \: 
 SMB         10.129.14.128   445    DEVSMB           [+] Enumerated shares
 SMB         10.129.14.128   445    DEVSMB           Share           Permissions     Remark
 SMB         10.129.14.128   445    DEVSMB           -----           -----------     ------
-SMB         10.129.14.128   445    DEVSMB           print$                          Printer DriversSMB         10.129.14.128   445    DEVSMB           home                            INFREIGHT Samba
+SMB         10.129.14.128   445    DEVSMB           print$                          Printer Drivers
+SMB         10.129.14.128   445    DEVSMB           home                            INFREIGHT Samba
 SMB         10.129.14.128   445    DEVSMB           dev                             DEVenv
 SMB         10.129.14.128   445    DEVSMB           notes           READ,WRITE      CheckIT
 SMB         10.129.14.128   445    DEVSMB           IPC$                            IPC Service (DEVSM)
@@ -536,13 +585,17 @@ Another tool worth mentioning is the so-called [enum4linux-ng](https://github.c
 ### **Enum4Linux-ng - Installation**
 
 ```
-th1nyunb0y@htb[/htb]$ git clone https://github.com/cddmp/enum4linux-ng.gitth1nyunb0y@htb[/htb]$ cd enum4linux-ngth1nyunb0y@htb[/htb]$ pip3 install -r requirements.txt
+th1nyunb0y@htb[/htb]$ git clone https://github.com/cddmp/enum4linux-ng.git
+th1nyunb0y@htb[/htb]$ cd enum4linux-ng
+th1nyunb0y@htb[/htb]$ pip3 install -r requirements.txt
 ```
 
 ### **Enum4Linux-ng - Enumeration**
 
 ```
-th1nyunb0y@htb[/htb]$ ./enum4linux-ng.py 10.129.14.128 -AENUM4LINUX - next generation
+th1nyunb0y@htb[/htb]$ ./enum4linux-ng.py 10.129.14.128 -A
+
+ENUM4LINUX - next generation
 
  ==========================
 |    Target Information    |
@@ -654,7 +707,78 @@ Server type string: Wk Sv PrQ Unx NT SNT DEVSM
   name: cry0l1t3
   acb: '0x00000014'
   description: ''
-....
+
+ =======================================
+|    Groups via RPC on 10.129.14.128    |
+ =======================================
+[*] Enumerating local groups
+[+] Found 0 group(s) via 'enumalsgroups domain'
+[*] Enumerating builtin groups
+[+] Found 0 group(s) via 'enumalsgroups builtin'
+[*] Enumerating domain groups
+[+] Found 0 group(s) via 'enumdomgroups'
+
+ =======================================
+|    Shares via RPC on 10.129.14.128    |
+ =======================================
+[*] Enumerating shares
+[+] Found 5 share(s):
+IPC$:
+  comment: IPC Service (DEVSM)
+  type: IPC
+dev:
+  comment: DEVenv
+  type: Disk
+home:
+  comment: INFREIGHT Samba
+  type: Disk
+notes:
+  comment: CheckIT
+  type: Disk
+print$:
+  comment: Printer Drivers
+  type: Disk
+[*] Testing share IPC$
+[-] Could not check share: STATUS_OBJECT_NAME_NOT_FOUND
+[*] Testing share dev
+[-] Share doesn't exist
+[*] Testing share home
+[+] Mapping: OK, Listing: OK
+[*] Testing share notes
+[+] Mapping: OK, Listing: OK
+[*] Testing share print$
+[+] Mapping: DENIED, Listing: N/A
+
+ ==========================================
+|    Policies via RPC for 10.129.14.128    |
+ ==========================================
+[*] Trying port 445/tcp
+[+] Found policy:
+domain_password_information:
+  pw_history_length: None
+  min_pw_length: 5
+  min_pw_age: none
+  max_pw_age: 49710 days 6 hours 21 minutes
+  pw_properties:
+  - DOMAIN_PASSWORD_COMPLEX: false
+  - DOMAIN_PASSWORD_NO_ANON_CHANGE: false
+  - DOMAIN_PASSWORD_NO_CLEAR_CHANGE: false
+  - DOMAIN_PASSWORD_LOCKOUT_ADMINS: false
+  - DOMAIN_PASSWORD_PASSWORD_STORE_CLEARTEXT: false
+  - DOMAIN_PASSWORD_REFUSE_PASSWORD_CHANGE: false
+domain_lockout_information:
+  lockout_observation_window: 30 minutes
+  lockout_duration: 30 minutes
+  lockout_threshold: None
+domain_logoff_information:
+  force_logoff_time: 49710 days 6 hours 21 minutes
+
+ ==========================================
+|    Printers via RPC for 10.129.14.128    |
+ ==========================================
+[+] No printers returned (this is not an error)
+
+Completed after 0.61 seconds
 ```
 
 We need to use more than two tools for enumeration. Because it can happen that due to the programming of the tools, we get different information that we have to check manually. Therefore, we should never rely only on automated tools where we do not know precisely how they were written.

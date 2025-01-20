@@ -31,7 +31,9 @@ IPMI communicates over port 623 UDP. Systems that use the IPMI protocol are call
 ### **Nmap**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap -sU --script ipmi-version -p 623 ilo.inlanfreight.localStarting Nmap 7.92 ( https://nmap.org ) at 2021-11-04 21:48 GMT
+th1nyunb0y@htb[/htb]$ sudo nmap -sU --script ipmi-version -p 623 ilo.inlanfreight.local
+
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-11-04 21:48 GMT
 Nmap scan report for ilo.inlanfreight.local (172.16.2.2)
 Host is up (0.00064s latency).
 

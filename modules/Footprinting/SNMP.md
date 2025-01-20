@@ -53,7 +53,9 @@ The default configuration of the SNMP daemon defines the basic settings for the 
 ### **SNMP Daemon Config**
 
 ```
-th1nyunb0y@htb[/htb]$ cat /etc/snmp/snmpd.conf | grep -v "#" | sed -r '/^\s*$/d'sysLocation    Sitting on the Dock of the Bay
+th1nyunb0y@htb[/htb]$ cat /etc/snmp/snmpd.conf | grep -v "#" | sed -r '/^\s*$/d'
+
+sysLocation    Sitting on the Dock of the Bay
 sysContact     Me <me@example.org>
 sysServices    72
 master  agentx
@@ -88,7 +90,9 @@ For footprinting SNMP, we can use tools like `snmpwalk`, `onesixtyone`, and `
 ### **SNMPwalk**
 
 ```
-th1nyunb0y@htb[/htb]$ snmpwalk -v2c -c public 10.129.14.128iso.3.6.1.2.1.1.1.0 = STRING: "Linux htb 5.11.0-34-generic#36~20.04.1-Ubuntu SMP Fri Aug 27 08:06:32 UTC 2021 x86_64"
+th1nyunb0y@htb[/htb]$ snmpwalk -v2c -c public 10.129.14.128
+
+iso.3.6.1.2.1.1.1.0 = STRING: "Linux htb 5.11.0-34-generic#36~20.04.1-Ubuntu SMP Fri Aug 27 08:06:32 UTC 2021 x86_64"
 iso.3.6.1.2.1.1.2.0 = OID: iso.3.6.1.4.1.8072.3.2.10
 iso.3.6.1.2.1.1.3.0 = Timeticks: (5134) 0:00:51.34
 iso.3.6.1.2.1.1.4.0 = STRING: "mrb3n@inlanefreight.htb"
@@ -164,8 +168,11 @@ Here we recognize some Python packages that have been installed on the system. I
 ### **OneSixtyOne**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo apt install onesixtyoneth1nyunb0y@htb[/htb]$ onesixtyone -c /opt/useful/seclists/Discovery/SNMP/snmp.txt 10.129.14.128Scanning 1 hosts, 3220 communities
-10.129.14.128 [public] Linux htb 5.11.0-37-generic#41~20.04.2-Ubuntu SMP Fri Sep 24 09:06:38 UTC 2021 x86_64
+th1nyunb0y@htb[/htb]$ sudo apt install onesixtyone
+th1nyunb0y@htb[/htb]$ onesixtyone -c /opt/useful/seclists/Discovery/SNMP/snmp.txt 10.129.14.128
+
+Scanning 1 hosts, 3220 communities
+10.129.14.128 [public] Linux htb 5.11.0-37-generic #41~20.04.2-Ubuntu SMP Fri Sep 24 09:06:38 UTC 2021 x86_64
 ```
 
 Often, when certain community strings are bound to specific IP addresses, they are named with the hostname of the host, and sometimes even symbols are added to these names to make them more challenging to identify. However, if we imagine an extensive network with over 100 different servers managed using SNMP, the labels, in that case, will have some pattern to them. Therefore, we can use different rules to guess them. We can use the tool [crunch](https://secf00tprint.github.io/blog/passwords/crunch/advanced/en) to create custom wordlists. Creating custom wordlists is not an essential part of this module, but more details can be found in the module [Cracking Passwords With Hashcat](https://academy.hackthebox.com/course/preview/cracking-passwords-with-hashcat).
@@ -175,7 +182,12 @@ Once we know a community string, we can use it with [braa](https://github.com/m
 ### **Braa**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo apt install braath1nyunb0y@htb[/htb]$ braa <community string>@<IP>:.1.3.6.*# Syntaxth1nyunb0y@htb[/htb]$ braa public@10.129.14.128:.1.3.6.*10.129.14.128:20ms:.1.3.6.1.2.1.1.1.0:Linux htb 5.11.0-34-generic#36~20.04.1-Ubuntu SMP Fri Aug 27 08:06:32 UTC 2021 x86_6410.129.14.128:20ms:.1.3.6.1.2.1.1.2.0:.1.3.6.1.4.1.8072.3.2.10
+th1nyunb0y@htb[/htb]$ sudo apt install braa
+th1nyunb0y@htb[/htb]$ braa <community string>@<IP>:.1.3.6.*   # Syntax
+th1nyunb0y@htb[/htb]$ braa public@10.129.14.128:.1.3.6.*
+
+10.129.14.128:20ms:.1.3.6.1.2.1.1.1.0:Linux htb 5.11.0-34-generic #36~20.04.1-Ubuntu SMP Fri Aug 27 08:06:32 UTC 2021 x86_64
+10.129.14.128:20ms:.1.3.6.1.2.1.1.2.0:.1.3.6.1.4.1.8072.3.2.10
 10.129.14.128:20ms:.1.3.6.1.2.1.1.3.0:548
 10.129.14.128:20ms:.1.3.6.1.2.1.1.4.0:mrb3n@inlanefreight.htb
 10.129.14.128:20ms:.1.3.6.1.2.1.1.5.0:htb
