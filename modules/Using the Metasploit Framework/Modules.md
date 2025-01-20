@@ -166,7 +166,9 @@ Matching Modules
 To select our first module, we first need to find one. Let's suppose that we have a target running a version of SMB vulnerable to EternalRomance (MS17_010) exploits. We have found that SMB server port 445 is open upon scanning the target.
 
 ```
-th1nyunb0y@htb[/htb]$ nmap -sV 10.10.10.40Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-13 21:38 UTC
+th1nyunb0y@htb[/htb]$ nmap -sV 10.10.10.40
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-13 21:38 UTC
 Stats: 0:00:50 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
 Nmap scan report for 10.10.10.40
 Host is up (0.051s latency).

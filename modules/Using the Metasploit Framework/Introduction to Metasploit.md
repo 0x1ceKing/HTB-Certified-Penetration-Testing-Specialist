@@ -112,7 +112,9 @@ ffautoregen.rb     nexpose.rb     socket_logger.rb
 Meterpreter functionality and other useful scripts.
 
 ```
-th1nyunb0y@htb[/htb]$ ls /usr/share/metasploit-framework/scripts/meterpreter  ps  resource  shell
+th1nyunb0y@htb[/htb]$ ls /usr/share/metasploit-framework/scripts/
+
+meterpreter  ps  resource  shell
 ```
 
 ### **Tools**

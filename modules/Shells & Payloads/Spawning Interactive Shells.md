@@ -38,7 +38,7 @@ If the programming language [Perl](https://www.perl.org/) is present on the sy
 ### **Perl To Shell**
 
 ```
-perl —e 'exec "/bin/sh";'
+perl -e 'exec "/bin/sh";'
 ```
 
 ```

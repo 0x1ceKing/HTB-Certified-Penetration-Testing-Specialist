@@ -38,7 +38,9 @@ First, we must ensure that the PostgreSQL server is up and running on our host m
 ### **PostgreSQL Status**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo service postgresql status● postgresql.service - PostgreSQL RDBMS
+th1nyunb0y@htb[/htb]$ sudo service postgresql status
+
+● postgresql.service - PostgreSQL RDBMS
      Loaded: loaded (/lib/systemd/system/postgresql.service; disabled; vendor preset: disabled)
      Active: active (exited) since Fri 2022-05-06 14:51:30 BST; 3min 51s ago
     Process: 2147 ExecStart=/bin/true (code=exited, status=0/SUCCESS)
@@ -61,7 +63,9 @@ After starting PostgreSQL, we need to create and initialize the MSF database wit
 ### **MSF - Initiate a Database**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo msfdb init[i] Database already started
+th1nyunb0y@htb[/htb]$ sudo msfdb init
+
+[i] Database already started
 [+] Creating database user 'msf'
 [+] Creating databases 'msf'
 [+] Creating databases 'msf_test'
@@ -77,14 +81,18 @@ Did you mean? with_options
 Sometimes an error can occur if Metasploit is not up to date. This difference that causes the error can happen for several reasons. First, often it helps to update Metasploit again (`apt update`) to solve this problem. Then we can try to reinitialize the MSF database.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo msfdb init[i] Database already started
+th1nyunb0y@htb[/htb]$ sudo msfdb init
+
+[i] Database already started
 [i] The database appears to be already configured, skipping initialization
 ```
 
 If the initialization is skipped and Metasploit tells us that the database is already configured, we can recheck the status of the database.
 
 ```
-th1nyunb0y@htb[/htb]$ sudo msfdb status● postgresql.service - PostgreSQL RDBMS
+th1nyunb0y@htb[/htb]$ sudo msfdb status
+
+● postgresql.service - PostgreSQL RDBMS
      Loaded: loaded (/lib/systemd/system/postgresql.service; disabled; vendor preset: disabled)
      Active: active (exited) since Mon 2022-05-09 15:19:57 BST; 35min ago
     Process: 2476 ExecStart=/bin/true (code=exited, status=0/SUCCESS)
@@ -107,7 +115,9 @@ postgres    2458       1  0 15:19 ?        Ss     0:00 /usr/lib/postgresql/13/bi
 If this error does not appear, which often happens after a fresh installation of Metasploit, then we will see the following when initializing the database:
 
 ```
-th1nyunb0y@htb[/htb]$ sudo msfdb init[+] Starting database
+th1nyunb0y@htb[/htb]$ sudo msfdb init
+
+[+] Starting database
 [+] Creating database user 'msf'
 [+] Creating databases 'msf'
 [+] Creating databases 'msf_test'
@@ -120,7 +130,9 @@ After the database has been initialized, we can start `msfconsole` and connect
 ### **MSF - Connect to the Initiated Database**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo msfdb run[i] Database already started
+th1nyunb0y@htb[/htb]$ sudo msfdb run
+
+[i] Database already started
 
          .                                         .
  .
@@ -155,7 +167,11 @@ If, however, we already have the database configured and are not able to change 
 ### **MSF - Reinitiate the Database**
 
 ```
-th1nyunb0y@htb[/htb]$ msfdb reinitth1nyunb0y@htb[/htb]$ cp /usr/share/metasploit-framework/config/database.yml ~/.msf4/th1nyunb0y@htb[/htb]$ sudo service postgresql restartth1nyunb0y@htb[/htb]$ msfconsole -qmsf6 > db_status
+th1nyunb0y@htb[/htb]$ msfdb reinitth1nyunb0y@htb[/htb]$ cp /usr/share/metasploit-framework/config/database.yml ~/.msf4/
+
+th1nyunb0y@htb[/htb]$ sudo service postgresql restart
+
+th1nyunb0y@htb[/htb]$ msfconsole -qmsf6 > db_status
 
 [*] Connected to msf. Connection type: PostgreSQL.
 ```
@@ -252,7 +268,9 @@ Next, let us assume we want to import a `Nmap scan` of a host into our Databas
 ### **Stored Nmap Scan**
 
 ```
-th1nyunb0y@htb[/htb]$ cat Target.nmapStarting Nmap 7.80 ( https://nmap.org ) at 2020-08-17 20:54 UTC
+th1nyunb0y@htb[/htb]$ cat Target.nmap
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-17 20:54 UTC
 Nmap scan report for 10.10.10.40
 Host is up (0.017s latency).
 Not shown: 991 closed ports

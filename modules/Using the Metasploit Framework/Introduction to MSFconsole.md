@@ -76,7 +76,9 @@ The old way would have been to run `msfupdate` in our OS terminal (outside `m
 ### **Installing MSF**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo apt update && sudo apt install metasploit-framework<SNIP>
+th1nyunb0y@htb[/htb]$ sudo apt update && sudo apt install metasploit-framework
+
+<SNIP>
 
 (Reading database ... 414458 files and directories currently installed.)
 Preparing to unpack .../metasploit-framework_6.0.2-0parrot1_amd64.deb ...
