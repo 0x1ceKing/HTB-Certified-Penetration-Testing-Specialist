@@ -50,7 +50,8 @@ Caution: Some servers can detect and block excessive DNS queries. Use caution an
 ## **Groping DNS**
 
 ```
-th1nyunb0y@htb[/htb]$ dig google.com; <<>> DiG 9.18.24-0ubuntu0.22.04.1-Ubuntu <<>> google.com
+th1nyunb0y@htb[/htb]$ dig google.com
+; <<>> DiG 9.18.24-0ubuntu0.22.04.1-Ubuntu <<>> google.com
 ;; global options: +cmd
 ;; Got answer:
 ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 16449
@@ -93,6 +94,8 @@ An `opt pseudosection` can sometimes exist in a `dig` query. This is due to 
 If you just want the answer to the question, without any of the other information, you can query `dig` using `+short`:
 
 ```
-th1nyunb0y@htb[/htb]$ dig +short hackthebox.com104.18.20.126
+th1nyunb0y@htb[/htb]$ dig +short hackthebox.com
+
+104.18.20.126
 104.18.21.126
 ```

@@ -50,7 +50,9 @@ th1nyunb0y@htb[/htb]$ curl -I inlanefreight.com
 The output will include the server banner, revealing the web server software and version number:
 
 ```
-th1nyunb0y@htb[/htb]$ curl -I inlanefreight.comHTTP/1.1 301 Moved Permanently
+th1nyunb0y@htb[/htb]$ curl -I inlanefreight.com
+
+HTTP/1.1 301 Moved Permanently
 Date: Fri, 31 May 2024 12:07:44 GMT
 Server: Apache/2.4.41 (Ubuntu)
 Location: https://inlanefreight.com/
@@ -60,7 +62,9 @@ Content-Type: text/html; charset=iso-8859-1
 In this case, we see that `inlanefreight.com` is running on `Apache/2.4.41`, specifically the `Ubuntu` version. This information is our first clue, hinting at the underlying technology stack. It's also trying to redirect to `https://inlanefreight.com/` so grab those banners too
 
 ```
-th1nyunb0y@htb[/htb]$ curl -I https://inlanefreight.comHTTP/1.1 301 Moved Permanently
+th1nyunb0y@htb[/htb]$ curl -I https://inlanefreight.com
+
+HTTP/1.1 301 Moved Permanently
 Date: Fri, 31 May 2024 12:12:12 GMT
 Server: Apache/2.4.41 (Ubuntu)
 X-Redirect-By: WordPress
@@ -71,7 +75,9 @@ Content-Type: text/html; charset=UTF-8
 We now get a really interesting header, the server is trying to redirect us again, but this time we see that it's `WordPress` that is doing the redirection to `https://www.inlanefreight.com/`
 
 ```
-th1nyunb0y@htb[/htb]$ curl -I https://www.inlanefreight.comHTTP/1.1 200 OK
+th1nyunb0y@htb[/htb]$ curl -I https://www.inlanefreight.com
+
+HTTP/1.1 200 OK
 Date: Fri, 31 May 2024 12:12:26 GMT
 Server: Apache/2.4.41 (Ubuntu)
 Link: <https://www.inlanefreight.com/index.php/wp-json/>; rel="https://api.w.org/"
@@ -95,7 +101,9 @@ th1nyunb0y@htb[/htb]$ pip3 install git+https://github.com/EnableSecurity/wafw00f
 Once it's installed, pass the domain you want to check as an argument to the tool:
 
 ```
-th1nyunb0y@htb[/htb]$ wafw00f inlanefreight.com                ______
+th1nyunb0y@htb[/htb]$ wafw00f inlanefreight.com
+
+                ______
                /      \
               (  W00f! )
                \  ____/
@@ -111,7 +119,7 @@ th1nyunb0y@htb[/htb]$ wafw00f inlanefreight.com                ______
 
                         ~ WAFW00F : v2.2.0 ~
         The Web Application Firewall Fingerprinting Toolkit
-
+    
 [*] Checking https://inlanefreight.com
 [+] The site https://inlanefreight.com is behind Wordfence (Defiant) WAF.
 [~] Number of requests: 2
@@ -128,7 +136,10 @@ This means the site has an additional security layer that could block or filter 
 `Nikto` is pre-installed on pwnbox, but if you need to install it, you can run the following commands:
 
 ```
-th1nyunb0y@htb[/htb]$ sudo apt update && sudo apt install -y perlth1nyunb0y@htb[/htb]$ git clone https://github.com/sullo/niktoth1nyunb0y@htb[/htb]$ cd nikto/programth1nyunb0y@htb[/htb]$ chmod +x ./nikto.pl
+th1nyunb0y@htb[/htb]$ sudo apt update && sudo apt install -y perl
+th1nyunb0y@htb[/htb]$ git clone https://github.com/sullo/nikto
+th1nyunb0y@htb[/htb]$ cd nikto/program
+th1nyunb0y@htb[/htb]$ chmod +x ./nikto.pl
 ```
 
 To scan `inlanefreight.com` using `Nikto`, only running the fingerprinting modules, execute the following command:
@@ -142,7 +153,9 @@ The `-h` flag specifies the target host. The `-Tuning b` flag tells `Nikto`
 `Nikto` will then initiate a series of tests, attempting to identify outdated software, insecure files or configurations, and other potential security risks.
 
 ```
-th1nyunb0y@htb[/htb]$ nikto -h inlanefreight.com -Tuning b- Nikto v2.5.0
+th1nyunb0y@htb[/htb]$ nikto -h inlanefreight.com -Tuning b
+
+- Nikto v2.5.0
 ---------------------------------------------------------------------------
 + Multiple IPs found: 134.209.24.248, 2a03:b0c0:1:e0::32c:b001
 + Target IP:          134.209.24.248

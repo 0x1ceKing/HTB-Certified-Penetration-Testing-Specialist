@@ -50,7 +50,8 @@ th1nyunb0y@htb[/htb]$ dig axfr @nsztm1.digi.ninja zonetransfer.me
 This command instructs `dig` to request a full zone transfer (`axfr`) from the DNS server responsible for `zonetransfer.me`. If the server is misconfigured and allows the transfer, you'll receive a complete list of DNS records for the domain, including all subdomains.
 
 ```
-th1nyunb0y@htb[/htb]$ dig axfr @nsztm1.digi.ninja zonetransfer.me; <<>> DiG 9.18.12-1~bpo11+1-Debian <<>> axfr @nsztm1.digi.ninja zonetransfer.me
+th1nyunb0y@htb[/htb]$ dig axfr @nsztm1.digi.ninja zonetransfer.me
+; <<>> DiG 9.18.12-1~bpo11+1-Debian <<>> axfr @nsztm1.digi.ninja zonetransfer.me
 ; (1 server found)
 ;; global options: +cmd
 zonetransfer.me.	7200	IN	SOA	nsztm1.digi.ninja. robin.digi.ninja. 2019100801 172800 900 1209600 3600

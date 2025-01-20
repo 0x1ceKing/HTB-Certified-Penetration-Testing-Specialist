@@ -29,9 +29,13 @@ Code: apacheconf
 # Example of name-based virtual host configuration in Apache
 <VirtualHost *:80>ServerName www.example1.com
     DocumentRoot /var/www/example1
-</VirtualHost><VirtualHost *:80>ServerName www.example2.org
+</VirtualHost>
+
+<VirtualHost *:80>ServerName www.example2.org
     DocumentRoot /var/www/example2
-</VirtualHost><VirtualHost *:80>ServerName www.another-example.net
+</VirtualHost>
+
+<VirtualHost *:80>ServerName www.another-example.net
     DocumentRoot /var/www/another-example
 </VirtualHost>
 ```
@@ -103,7 +107,9 @@ There are a couple of other arguments that are worth knowing:
 - You can use the `o` flag to save the output to a file for later analysis.
 
 ```
-th1nyunb0y@htb[/htb]$ gobuster vhost -u http://inlanefreight.htb:81 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt --append-domain===============================================================
+th1nyunb0y@htb[/htb]$ gobuster vhost -u http://inlanefreight.htb:81 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt --append-domain
+
+===============================================================
 Gobuster v3.6
 by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 ===============================================================

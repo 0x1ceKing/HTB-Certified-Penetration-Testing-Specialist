@@ -13,7 +13,9 @@ th1nyunb0y@htb[/htb]$ sudo apt updateth1nyunb0y@htb[/htb]$ sudo apt install whoi
 The simplest way to access WHOIS data is through the `whois` command-line tool. Let's perform a WHOIS lookup on `facebook.com`:
 
 ```
-th1nyunb0y@htb[/htb]$ whois facebook.com   Domain Name: FACEBOOK.COM
+th1nyunb0y@htb[/htb]$ whois facebook.com
+
+   Domain Name: FACEBOOK.COM
    Registry Domain ID: 2320948_DOMAIN_COM-VRSN
    Registrar WHOIS Server: whois.registrarsafe.com
    Registrar URL: http://www.registrarsafe.com

@@ -53,7 +53,9 @@ If we look at these scans, we will see how the results differ.
 ### **SYN-Scan**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 21,22,25 -sS -Pn -n --disable-arp-ping --packet-traceStarting Nmap 7.80 ( https://nmap.org ) at 2020-06-21 14:56 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 21,22,25 -sS -Pn -n --disable-arp-ping --packet-trace
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-21 14:56 CEST
 SENT (0.0278s) TCP 10.10.14.2:57347 > 10.129.2.28:22 S ttl=53 id=22412 iplen=44  seq=4092255222 win=1024 <mss 1460>
 SENT (0.0278s) TCP 10.10.14.2:57347 > 10.129.2.28:25 S ttl=50 id=62291 iplen=44  seq=4092255222 win=1024 <mss 1460>
 SENT (0.0278s) TCP 10.10.14.2:57347 > 10.129.2.28:21 S ttl=58 id=38696 iplen=44  seq=4092255222 win=1024 <mss 1460>
@@ -76,7 +78,9 @@ Nmap done: 1 IP address (1 host up) scanned in 0.07 seconds
 ### **ACK-Scan**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 21,22,25 -sA -Pn -n --disable-arp-ping --packet-traceStarting Nmap 7.80 ( https://nmap.org ) at 2020-06-21 14:57 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 21,22,25 -sA -Pn -n --disable-arp-ping --packet-trace
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-21 14:57 CEST
 SENT (0.0422s) TCP 10.10.14.2:49343 > 10.129.2.28:21 A ttl=49 id=12381 iplen=40  seq=0 win=1024
 SENT (0.0423s) TCP 10.10.14.2:49343 > 10.129.2.28:22 A ttl=41 id=5146 iplen=40  seq=0 win=1024
 SENT (0.0423s) TCP 10.10.14.2:49343 > 10.129.2.28:25 A ttl=49 id=5800 iplen=40  seq=0 win=1024
@@ -132,7 +136,9 @@ There are cases in which administrators block specific subnets from different re
 ### **Scan by Using Decoys**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 80 -sS -Pn -n --disable-arp-ping --packet-trace -D RND:5Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-21 16:14 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p 80 -sS -Pn -n --disable-arp-ping --packet-trace -D RND:5
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-21 16:14 CEST
 SENT (0.0378s) TCP 102.52.161.59:59289 > 10.129.2.28:80 S ttl=42 id=29822 iplen=44  seq=3687542010 win=1024 <mss 1460>
 SENT (0.0378s) TCP 10.10.14.2:59289 > 10.129.2.28:80 S ttl=59 id=29822 iplen=44  seq=3687542010 win=1024 <mss 1460>
 SENT (0.0379s) TCP 210.120.38.29:59289 > 10.129.2.28:80 S ttl=37 id=29822 iplen=44  seq=3687542010 win=1024 <mss 1460>
@@ -168,7 +174,9 @@ Another scenario would be that only individual subnets would not have access to 
 ### **Testing Firewall Rule**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -n -Pn -p445 -OStarting Nmap 7.80 ( https://nmap.org ) at 2020-06-22 01:23 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -n -Pn -p445 -O
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-22 01:23 CEST
 Nmap scan report for 10.129.2.28
 Host is up (0.032s latency).
 
@@ -185,7 +193,9 @@ Nmap done: 1 IP address (1 host up) scanned in 3.14 seconds
 ### **Scan by Using Different Source IP**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -n -Pn -p 445 -O -S 10.129.2.200 -e tun0Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-22 01:16 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -n -Pn -p 445 -O -S 10.129.2.200 -e tun0
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-22 01:16 CEST
 Nmap scan report for 10.129.2.28
 Host is up (0.010s latency).
 
@@ -223,7 +233,9 @@ However, `Nmap` still gives us a way to specify DNS servers ourselves (`--dns-
 ### **SYN-Scan of a Filtered Port**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p50000 -sS -Pn -n --disable-arp-ping --packet-traceStarting Nmap 7.80 ( https://nmap.org ) at 2020-06-21 22:50 CEST
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p50000 -sS -Pn -n --disable-arp-ping --packet-trace
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-21 22:50 CEST
 SENT (0.0417s) TCP 10.10.14.2:33436 > 10.129.2.28:50000 S ttl=41 id=21939 iplen=44  seq=736533153 win=1024 <mss 1460>
 SENT (1.0481s) TCP 10.10.14.2:33437 > 10.129.2.28:50000 S ttl=46 id=6446 iplen=44  seq=736598688 win=1024 <mss 1460>
 Nmap scan report for 10.129.2.28
@@ -238,7 +250,9 @@ Nmap done: 1 IP address (1 host up) scanned in 2.06 seconds
 ### **SYN-Scan From DNS Port**
 
 ```
-th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p50000 -sS -Pn -n --disable-arp-ping --packet-trace --source-port 53SENT (0.0482s) TCP 10.10.14.2:53 > 10.129.2.28:50000 S ttl=58 id=27470 iplen=44  seq=4003923435 win=1024 <mss 1460>
+th1nyunb0y@htb[/htb]$ sudo nmap 10.129.2.28 -p50000 -sS -Pn -n --disable-arp-ping --packet-trace --source-port 53
+
+SENT (0.0482s) TCP 10.10.14.2:53 > 10.129.2.28:50000 S ttl=58 id=27470 iplen=44  seq=4003923435 win=1024 <mss 1460>
 RCVD (0.0608s) TCP 10.129.2.28:50000 > 10.10.14.2:53 SA ttl=64 id=0 iplen=44  seq=540635485 win=64240 <mss 1460>
 Nmap scan report for 10.129.2.28
 Host is up (0.013s latency).
@@ -268,7 +282,9 @@ Now that we have found out that the firewall accepts `TCP port 53`, it is very 
 ### **Connect To The Filtered Port**
 
 ```
-th1nyunb0y@htb[/htb]$ ncat -nv --source-port 53 10.129.2.28 50000Ncat: Version 7.80 ( https://nmap.org/ncat )
+th1nyunb0y@htb[/htb]$ ncat -nv --source-port 53 10.129.2.28 50000
+
+Ncat: Version 7.80 ( https://nmap.org/ncat )
 Ncat: Connected to 10.129.2.28:50000.
 220 ProFTPd
 ```

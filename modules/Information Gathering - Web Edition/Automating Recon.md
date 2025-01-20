@@ -46,7 +46,9 @@ These frameworks aim to provide a complete suite of tools for web reconnaissance
 Installation is quick and easy:
 
 ```
-th1nyunb0y@htb[/htb]$ git clone https://github.com/thewhiteh4t/FinalRecon.gitth1nyunb0y@htb[/htb]$ cd FinalReconth1nyunb0y@htb[/htb]$ pip3 install -r requirements.txtth1nyunb0y@htb[/htb]$ chmod +x ./finalrecon.pyth1nyunb0y@htb[/htb]$ ./finalrecon.py --helpusage: finalrecon.py [-h] [--url URL] [--headers] [--sslinfo] [--whois]
+th1nyunb0y@htb[/htb]$ git clone https://github.com/thewhiteh4t/FinalRecon.git
+th1nyunb0y@htb[/htb]$ cd FinalRecon
+th1nyunb0y@htb[/htb]$ pip3 install -r requirements.txtth1nyunb0y@htb[/htb]$ chmod +x ./finalrecon.pyth1nyunb0y@htb[/htb]$ ./finalrecon.py --helpusage: finalrecon.py [-h] [--url URL] [--headers] [--sslinfo] [--whois]
                      [--crawl] [--dns] [--sub] [--dir] [--wayback] [--ps]
                      [--full] [-nb] [-dt DT] [-pt PT] [-T T] [-w W] [-r] [-s]
                      [-sp SP] [-d D] [-e E] [-o O] [-cd CD] [-k K]
@@ -110,7 +112,8 @@ Finally, you can verify that `FinalRecon` is installed correctly and get an ov
 For instance, if we want `FinalRecon` to gather header information and perform a Whois lookup for `inlanefreight.com`, we would use the corresponding flags (`--headers` and `--whois`), so the command would be:
 
 ```
-th1nyunb0y@htb[/htb]$ ./finalrecon.py --headers --whois --url http://inlanefreight.com ______  __   __   __   ______   __
+th1nyunb0y@htb[/htb]$ ./finalrecon.py --headers --whois --url http://inlanefreight.com 
+______  __   __   __   ______   __
 /\  ___\/\ \ /\ "-.\ \ /\  __ \ /\ \
 \ \  __\\ \ \\ \ \-.  \\ \  __ \\ \ \____
  \ \_\   \ \_\\ \_\\"\_\\ \_\ \_\\ \_____\

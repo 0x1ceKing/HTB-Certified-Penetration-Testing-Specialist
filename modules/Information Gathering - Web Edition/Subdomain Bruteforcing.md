@@ -49,7 +49,9 @@ In this command:
 - `r`: This option enables recursive subdomain brute-forcing, meaning that if `dnsenum` finds a subdomain, it will then try to enumerate subdomains of that subdomain.
 
 ```
-th1nyunb0y@htb[/htb]$ dnsenum --enum inlanefreight.com -f  /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt dnsenum VERSION:1.2.6
+th1nyunb0y@htb[/htb]$ dnsenum --enum inlanefreight.com -f  /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt 
+
+dnsenum VERSION:1.2.6
 
 -----   inlanefreight.com   -----
 

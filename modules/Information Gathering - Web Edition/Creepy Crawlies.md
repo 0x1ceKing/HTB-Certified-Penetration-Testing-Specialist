@@ -38,7 +38,8 @@ This command will download and install Scrapy along with its dependencies, prepa
 First, run this command in your terminal to download the custom scrapy spider, `ReconSpider`, and extract it to the current working directory.
 
 ```
-th1nyunb0y@htb[/htb]$ wget -O ReconSpider.zip https://academy.hackthebox.com/storage/modules/144/ReconSpider.v1.2.zipth1nyunb0y@htb[/htb]$ unzip ReconSpider.zip
+th1nyunb0y@htb[/htb]$ wget -O ReconSpider.zip https://academy.hackthebox.com/storage/modules/144/ReconSpider.v1.2.zip
+th1nyunb0y@htb[/htb]$ \unzip ReconSpider.zip
 ```
 
 With the files extracted, you can run `ReconSpider.py` using the following command:
