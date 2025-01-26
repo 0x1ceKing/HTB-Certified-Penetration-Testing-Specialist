@@ -530,12 +530,9 @@ Finally, we need to transfer Julio's ccache file from `LINUX01` and create the
 [!bash!]$ export KRB5CCNAME=/home/htb-student/krb5cc_647401106_I8I133
 ```
 
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" />
 
-**Note:** If you are not familiar with file transfer operations, check out the module [File Transfers](https://academy.hackthebox.com/module/details/24).
+> **Note:** If you are not familiar with file transfer operations, check out the module [File Transfers](https://academy.hackthebox.com/module/details/24).
 
-</aside>
 
 ### **Impacket**
 
@@ -564,12 +561,8 @@ C:\>whoami
 inlanefreight\julio
 ```
 
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" />
+> **Note:** If you are using Impacket tools from a Linux machine connected to the domain, note that some Linux Active Directory implementations use the FILE: prefix in the KRB5CCNAME variable. If this is the case, we need to modify the variable only to include the path to the ccache file.
 
-**Note:** If you are using Impacket tools from a Linux machine connected to the domain, note that some Linux Active Directory implementations use the FILE: prefix in the KRB5CCNAME variable. If this is the case, we need to modify the variable only to include the path to the ccache file.
-
-</aside>
 
 ### **Evil-Winrm**
 
