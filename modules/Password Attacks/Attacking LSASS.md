@@ -114,7 +114,7 @@ If we manage to run this command and generate the `lsass.dmp` file, we can pro
 <aside>
 <img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" />
 
-Note: We can use the file transfer method discussed in the Attacking SAM section to get the lsass.dmp file from the target to our attack host.
+> **Note:** We can use the file transfer method discussed in the Attacking SAM section to get the lsass.dmp file from the target to our attack host.
 
 </aside>
 

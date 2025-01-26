@@ -58,7 +58,7 @@ We can install `CrackMapExec` via apt on a Parrot host or clone the [GitHub r
 th1nyunb0y@htb[/htb]$ sudo apt-get -y install crackmapexec
 ```
 
-Note: Alternatively, we can install [NetExec](https://github.com/Pennyw0rth/NetExec) to follow along using `sudo apt-get -y install netexec`
+> **Note:** Alternatively, we can install [NetExec](https://github.com/Pennyw0rth/NetExec) to follow along using `sudo apt-get -y install netexec`
 
 #### **CrackMapExec Menu Options**
 
