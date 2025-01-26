@@ -32,14 +32,14 @@
 
 - ## **Windows Lateral Movement**
 
-### [**Pass the Hash (PtH)**](./Pass%20the%20Hash%20(PtH).md)
+  - ### [**Pass the Hash (PtH)**](./Pass%20the%20Hash%20(PtH).md)
 
-### [**Pass the Ticket (PtT) from Windows**](./Pass%20the%20Ticket%20(PtT)%20from%20Windows.md)
+  - ### [**Pass the Ticket (PtT) from Windows**](./Pass%20the%20Ticket%20(PtT)%20from%20Windows.md)
 
-### [**Pass the Ticket (PtT) from Linux**](./Pass%20the%20Ticket%20(PtT)%20from%20Linux.md)
+  - ### [**Pass the Ticket (PtT) from Linux**](./Pass%20the%20Ticket%20(PtT)%20from%20Linux.md)
 
 - ## **Cracking Files**
 
-### [**Protected Files**](./Protected%20Files.md)
+  - ### [**Protected Files**](./Protected%20Files.md)
 
-### [**Protected Archives**](./Protected%20Archives.md)
+  - ### [**Protected Archives**](./Protected%20Archives.md)
