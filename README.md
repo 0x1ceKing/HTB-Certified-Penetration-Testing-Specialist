@@ -11,6 +11,7 @@
 ### [File Transfers](/modules/File%20Transfers/README.md)
 ### [Shells & Payloads](/modules/Shells%20&%20Payloads/README.md)
 ### [Using the Metasploit Framework](/modules/Using%20the%20Metasploit%20Framework/README.md)
+### [Password Attacks](/modules/Password%20Attacks/README.md)
 ## HackTheBox Certified Penetration Tester CheatSheet 
 * [Getting Started](/cheatsheet/Getting%20Started.md)  
 * [Network Enumeration NMAP](/cheatsheet/Network%20Enumeration%20NMAP.md)  
