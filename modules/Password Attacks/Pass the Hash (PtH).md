@@ -31,7 +31,6 @@ Let's assume we obtain the password hash (`64F12CDDAA88057E06A81B54E73B949B`) fo
 
 
 <aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" />
 **Note:** The tools we will be using are located in the C:\tools directory on the target host. Once you start the machine and complete the exercises, you can use the tools in that directory. This lab contains two machines, you will have access to one (MS01), and from there, you will connect to the second machine (DC01).</aside>
 
 
